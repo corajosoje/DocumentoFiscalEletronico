@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="file:/C:/NetBeansProjects/DocumentoFiscalEletronico/Arquivos/xsd%20CTe%203.0/procCTe_v3.00.xsd" uri="src/main/resources/jaxb/ConhecimentoTransporte3a/procCTe_v3.00.xsd"/>
+    <system systemId="file:/C:/NetBeansProjects/DocumentoFiscalEletronico/Arquivos/xsd%20CTe%203.0/cteTiposBasico_v3.00.xsd" uri="src/main/resources/jaxb/ConhecimentoTransporte3a/cteTiposBasico_v3.00.xsd"/>
+    <system systemId="file:/C:/NetBeansProjects/DocumentoFiscalEletronico/Arquivos/xsd%20CTe%203.0/xmldsig-core-schema_v1.01.xsd" uri="src/main/resources/jaxb/ConhecimentoTransporte3a/xmldsig-core-schema_v1.01.xsd"/>
+    <system systemId="file:/C:/NetBeansProjects/DocumentoFiscalEletronico/Arquivos/xsd%20CTe%203.0/tiposGeralCTe_v3.00.xsd" uri="src/main/resources/jaxb/ConhecimentoTransporte3a/tiposGeralCTe_v3.00.xsd"/>
+    <system systemId="file:/C:/NetBeansProjects/DocumentoFiscalEletronico/Arquivos/xsd%20NFe%204.0/procNFe_v4.00.xsd" uri="src/main/resources/jaxb/NotaFiscal4/procNFe_v4.00.xsd"/>
+    <system systemId="file:/C:/NetBeansProjects/DocumentoFiscalEletronico/Arquivos/xsd%20NFe%204.0/leiauteNFe_v4.00.xsd" uri="src/main/resources/jaxb/NotaFiscal4/leiauteNFe_v4.00.xsd"/>
+    <system systemId="file:/C:/NetBeansProjects/DocumentoFiscalEletronico/Arquivos/xsd%20NFe%204.0/xmldsig-core-schema_v1.01.xsd" uri="src/main/resources/jaxb/NotaFiscal4/xmldsig-core-schema_v1.01.xsd"/>
+    <system systemId="file:/C:/NetBeansProjects/DocumentoFiscalEletronico/Arquivos/xsd%20NFe%204.0/tiposBasico_v4.00.xsd" uri="src/main/resources/jaxb/NotaFiscal4/tiposBasico_v4.00.xsd"/>
+</catalog>
