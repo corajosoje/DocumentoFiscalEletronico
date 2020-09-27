@@ -5,8 +5,10 @@
  */
 package br.jefferson.documentoFiscal.dados.cadastro;
 
+import br.jefferson.conhecimento3a.CteProc;
 import br.jefferson.documentoFiscal.GeradorDocumentoFiscal;
 import br.jefferson.documentoFiscal.exception.GeradorDocumentoFiscalException;
+import br.jefferson.notafiscal4.TNfeProc;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -15,18 +17,31 @@ import java.util.logging.Logger;
  * @author jeffersonsvo
  */
 public class EnderecoEmit {
+private static TNfeProc NFe;
+    private static CteProc CTe;
 
+    public EnderecoEmit() {
+        if (GeradorDocumentoFiscal.xml instanceof TNfeProc) {
+            NFe = (TNfeProc)GeradorDocumentoFiscal.xml;
+            CTe = null;
+        } else if (GeradorDocumentoFiscal.xml instanceof CteProc) {
+            NFe = null;
+            CTe = (CteProc) GeradorDocumentoFiscal.xml;
+        } else {
+            throw new IllegalStateException("Documento Inválido");
+        }
+    }
     public String getUf() {
         try {
             switch (GeradorDocumentoFiscal.modelo) {
                 case 55:
-                    return GeradorDocumentoFiscal.getNotaFiscal().getNFe().getInfNFe().getEmit().getEnderEmit().getUF().value();
+                    return NFe.getNFe().getInfNFe().getEmit().getEnderEmit().getUF().value();
                 case 57:
-                    return GeradorDocumentoFiscal.getConhecimentoTransporte().getCTe().getInfCte().getEmit().getEnderEmit().getUF().value();
+                    return CTe.getCTe().getInfCte().getEmit().getEnderEmit().getUF().value();
                 default:
                     return "";
             }
-        } catch (GeradorDocumentoFiscalException | NullPointerException ex) {
+        } catch ( NullPointerException ex) {
             Logger.getLogger(EnderecoEmit.class.getName()).log(Level.SEVERE, null, ex);
             return "";
         }
@@ -37,13 +52,13 @@ public class EnderecoEmit {
 
             switch (GeradorDocumentoFiscal.modelo) {
                 case 55:
-                    return GeradorDocumentoFiscal.getNotaFiscal().getNFe().getInfNFe().getEmit().getEnderEmit().getXLgr();
+                    return NFe.getNFe().getInfNFe().getEmit().getEnderEmit().getXLgr();
                 case 57:
-                    return GeradorDocumentoFiscal.getConhecimentoTransporte().getCTe().getInfCte().getEmit().getEnderEmit().getXLgr();
+                    return CTe.getCTe().getInfCte().getEmit().getEnderEmit().getXLgr();
                 default:
                     return "";
             }
-        } catch (GeradorDocumentoFiscalException | NullPointerException ex) {
+        } catch ( NullPointerException ex) {
             Logger.getLogger(EnderecoEmit.class.getName()).log(Level.SEVERE, null, ex);
             return "";
         }
@@ -53,13 +68,13 @@ public class EnderecoEmit {
         try {
             switch (GeradorDocumentoFiscal.modelo) {
                 case 55:
-                    return GeradorDocumentoFiscal.getNotaFiscal().getNFe().getInfNFe().getEmit().getEnderEmit().getNro();
+                    return NFe.getNFe().getInfNFe().getEmit().getEnderEmit().getNro();
                 case 57:
-                    return GeradorDocumentoFiscal.getConhecimentoTransporte().getCTe().getInfCte().getEmit().getEnderEmit().getNro();
+                    return CTe.getCTe().getInfCte().getEmit().getEnderEmit().getNro();
                 default:
                     return "";
             }
-        } catch (GeradorDocumentoFiscalException | NullPointerException ex) {
+        } catch ( NullPointerException ex) {
             Logger.getLogger(EnderecoEmit.class.getName()).log(Level.SEVERE, null, ex);
             return "";
         }
@@ -69,13 +84,13 @@ public class EnderecoEmit {
         try {
             switch (GeradorDocumentoFiscal.modelo) {
                 case 55:
-                    return GeradorDocumentoFiscal.getNotaFiscal().getNFe().getInfNFe().getEmit().getIE();
+                    return NFe.getNFe().getInfNFe().getEmit().getIE();
                 case 57:
-                    return GeradorDocumentoFiscal.getConhecimentoTransporte().getCTe().getInfCte().getEmit().getIE();
+                    return CTe.getCTe().getInfCte().getEmit().getIE();
                 default:
                     return "";
             }
-        } catch (GeradorDocumentoFiscalException | NullPointerException ex) {
+        } catch ( NullPointerException ex) {
             Logger.getLogger(EnderecoEmit.class.getName()).log(Level.SEVERE, null, ex);
             return "";
         }
@@ -85,13 +100,13 @@ public class EnderecoEmit {
         try {
             switch (GeradorDocumentoFiscal.modelo) {
                 case 55:
-                    return GeradorDocumentoFiscal.getNotaFiscal().getNFe().getInfNFe().getEmit().getEnderEmit().getXBairro();
+                    return NFe.getNFe().getInfNFe().getEmit().getEnderEmit().getXBairro();
                 case 57:
-                    return GeradorDocumentoFiscal.getConhecimentoTransporte().getCTe().getInfCte().getEmit().getEnderEmit().getXBairro();
+                    return CTe.getCTe().getInfCte().getEmit().getEnderEmit().getXBairro();
                 default:
                     return "";
             }
-        } catch (GeradorDocumentoFiscalException | NullPointerException ex) {
+        } catch ( NullPointerException ex) {
             Logger.getLogger(EnderecoEmit.class.getName()).log(Level.SEVERE, null, ex);
             return "";
         }
@@ -101,13 +116,13 @@ public class EnderecoEmit {
         try {
             switch (GeradorDocumentoFiscal.modelo) {
                 case 55:
-                    return GeradorDocumentoFiscal.getNotaFiscal().getNFe().getInfNFe().getEmit().getEnderEmit().getXCpl();
+                    return NFe.getNFe().getInfNFe().getEmit().getEnderEmit().getXCpl();
                 case 57:
-                    return GeradorDocumentoFiscal.getConhecimentoTransporte().getCTe().getInfCte().getEmit().getEnderEmit().getXCpl();
+                    return CTe.getCTe().getInfCte().getEmit().getEnderEmit().getXCpl();
                 default:
                     return "";
             }
-        } catch (GeradorDocumentoFiscalException | NullPointerException ex) {
+        } catch ( NullPointerException ex) {
             Logger.getLogger(EnderecoEmit.class.getName()).log(Level.SEVERE, null, ex);
             return "";
         }

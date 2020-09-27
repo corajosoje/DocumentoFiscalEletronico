@@ -8,8 +8,8 @@ package br.jefferson.documentoFiscal.dados;
 import br.jefferson.documentoFiscal.dados.cadastro.Emitente;
 import br.jefferson.documentoFiscal.dados.cadastro.Destinatario;
 import br.jefferson.documentoFiscal.GeradorDocumentoFiscal;
-import br.jefferson.documentoFiscal.exception.GeradorDocumentoFiscalException;
 import br.jefferson.notafiscal4.TNFe;
+import br.jefferson.notafiscal4.TNfeProc;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,11 +20,21 @@ import java.util.logging.Logger;
  */
 public class NotaFiscal implements DocumentoFiscal {
 
+    private static TNfeProc NFe;
+
+    public NotaFiscal() {
+        if (GeradorDocumentoFiscal.xml instanceof TNfeProc) {
+            NFe = (TNfeProc) GeradorDocumentoFiscal.xml;
+        } else {
+            throw new IllegalStateException("Documento Inválido");
+        }
+    }
+
     @Override
     public String getChave() {
         try {
-            return GeradorDocumentoFiscal.getNotaFiscal().getProtNFe().getInfProt().getChNFe();
-        } catch (GeradorDocumentoFiscalException | NullPointerException ex) {
+            return NFe.getProtNFe().getInfProt().getChNFe();
+        } catch (NullPointerException ex) {
             Logger.getLogger(NotaFiscal.class.getName()).log(Level.SEVERE, null, ex);
             return "";
         }
@@ -48,8 +58,8 @@ public class NotaFiscal implements DocumentoFiscal {
     @Override
     public String getNumero() {
         try {
-            return GeradorDocumentoFiscal.getNotaFiscal().getNFe().getInfNFe().getIde().getNNF();
-        } catch (GeradorDocumentoFiscalException | NullPointerException ex) {
+            return NFe.getNFe().getInfNFe().getIde().getNNF();
+        } catch (NullPointerException ex) {
             Logger.getLogger(NotaFiscal.class.getName()).log(Level.SEVERE, null, ex);
             return "";
         }
@@ -58,8 +68,8 @@ public class NotaFiscal implements DocumentoFiscal {
     @Override
     public String getSerie() {
         try {
-            return GeradorDocumentoFiscal.getNotaFiscal().getNFe().getInfNFe().getIde().getSerie();
-        } catch (GeradorDocumentoFiscalException | NullPointerException ex) {
+            return NFe.getNFe().getInfNFe().getIde().getSerie();
+        } catch (NullPointerException ex) {
             Logger.getLogger(NotaFiscal.class.getName()).log(Level.SEVERE, null, ex);
             return "";
         }
@@ -73,7 +83,7 @@ public class NotaFiscal implements DocumentoFiscal {
     @Override
     public String getSituacaoDestinatario() {
         try {
-            switch (GeradorDocumentoFiscal.getNotaFiscal().getNFe().getInfNFe().getDest().getIndIEDest()) {
+            switch (NFe.getNFe().getInfNFe().getDest().getIndIEDest()) {
                 case "1":
                     return "Contribuinte ICMS";
                 case "2":
@@ -83,7 +93,7 @@ public class NotaFiscal implements DocumentoFiscal {
                 default:
                     return "";
             }
-        } catch (GeradorDocumentoFiscalException | NullPointerException ex) {
+        } catch (NullPointerException ex) {
             Logger.getLogger(NotaFiscal.class.getName()).log(Level.SEVERE, null, ex);
             return "";
         }
@@ -92,7 +102,7 @@ public class NotaFiscal implements DocumentoFiscal {
     @Override
     public String getFinalidadeNFe() {
         try {
-            switch (GeradorDocumentoFiscal.getNotaFiscal().getNFe().getInfNFe().getIde().getFinNFe()) {
+            switch (NFe.getNFe().getInfNFe().getIde().getFinNFe()) {
                 case "1":
                     return "NF-e normal";
                 case "2":
@@ -104,7 +114,7 @@ public class NotaFiscal implements DocumentoFiscal {
                 default:
                     return "";
             }
-        } catch (GeradorDocumentoFiscalException | NullPointerException ex) {
+        } catch (NullPointerException ex) {
             Logger.getLogger(NotaFiscal.class.getName()).log(Level.SEVERE, null, ex);
             return "";
         }
@@ -113,7 +123,7 @@ public class NotaFiscal implements DocumentoFiscal {
     @Override
     public String getTipoOperacao() {
         try {
-            switch (GeradorDocumentoFiscal.getNotaFiscal().getNFe().getInfNFe().getIde().getIndFinal()) {
+            switch (NFe.getNFe().getInfNFe().getIde().getIndFinal()) {
                 case "0":
                     return "Normal";
                 case "1":
@@ -121,7 +131,7 @@ public class NotaFiscal implements DocumentoFiscal {
                 default:
                     return "";
             }
-        } catch (GeradorDocumentoFiscalException | NullPointerException ex) {
+        } catch (NullPointerException ex) {
             Logger.getLogger(NotaFiscal.class.getName()).log(Level.SEVERE, null, ex);
             return "";
         }
@@ -130,8 +140,8 @@ public class NotaFiscal implements DocumentoFiscal {
     @Override
     public java.util.Date getDataEmissao() {
         try {
-            return GeradorDocumentoFiscal.FORMAT.parse(GeradorDocumentoFiscal.getNotaFiscal().getNFe().getInfNFe().getIde().getDhEmi().substring(0, 10));
-        } catch (GeradorDocumentoFiscalException | NullPointerException | ParseException ex) {
+            return GeradorDocumentoFiscal.FORMAT.parse(NFe.getNFe().getInfNFe().getIde().getDhEmi().substring(0, 10));
+        } catch (NullPointerException | ParseException ex) {
             Logger.getLogger(NotaFiscal.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
@@ -141,10 +151,10 @@ public class NotaFiscal implements DocumentoFiscal {
     public java.util.List<Item> getItens() {
         java.util.List<Item> itens = new java.util.ArrayList<>();
         try {
-            GeradorDocumentoFiscal.getNotaFiscal().getNFe().getInfNFe().getDet().forEach((TNFe.InfNFe.Det det) -> {
+            NFe.getNFe().getInfNFe().getDet().forEach((TNFe.InfNFe.Det det) -> {
                 itens.add(new Item(det));
             });
-        } catch (GeradorDocumentoFiscalException | NullPointerException ex) {
+        } catch (NullPointerException ex) {
             Logger.getLogger(NotaFiscal.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }

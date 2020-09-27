@@ -31,48 +31,21 @@ import javax.xml.stream.XMLStreamReader;
  */
 public class GeradorDocumentoFiscal {
 
-    private static Object xml;
+    public static Object xml;
     public static int modelo;
     public static final SimpleDateFormat FORMAT = new SimpleDateFormat("yyyy-MM-dd");
 
     /**
-     * Com base em um arquivo xml retorna a nota fiscal se corresponder
+     * Com base em um arquivo xml retorna o documento fiscal se corresponder
      *
      * @param arquivo arquivo xml de nota fiscal
-     * @return Nota Fiscal eletronica versão 4
+     * @return DocumentoFiscal referente ao arquivo
+     * @throws java.io.IOException se o arquivo não puder ser lido
+     * @throws javax.xml.bind.JAXBException se o arquivo não corresponder aos
+     * layouts oficiais
      * @throws GeradorDocumentoFiscalException
+     *
      */
-    public static TNfeProc getNotaFiscal(File arquivo) throws GeradorDocumentoFiscalException {
-        GeradorDocumentoFiscal.xml = null;
-        try {
-            GeradorDocumentoFiscal.xml = lerDocumento(arquivo);
-        } catch (IOException | JAXBException ex) {
-            throw new GeradorDocumentoFiscalException(ex);
-        }
-
-        if (xml instanceof TNfeProc) {
-            return (TNfeProc) GeradorDocumentoFiscal.xml;
-        } else {
-            throw new GeradorDocumentoFiscalException("Tipo de documento não é nota fiscal");
-        }
-    }
-
-    public static TNfeProc getNotaFiscal() throws GeradorDocumentoFiscalException {
-        if (xml instanceof TNfeProc) {
-            return (TNfeProc) GeradorDocumentoFiscal.xml;
-        } else {
-            throw new GeradorDocumentoFiscalException("Tipo de documento não é nota fiscal");
-        }
-    }
-
-    public static CteProc getConhecimentoTransporte() throws GeradorDocumentoFiscalException {
-        if (xml instanceof CteProc) {
-            return (CteProc) GeradorDocumentoFiscal.xml;
-        } else {
-            throw new GeradorDocumentoFiscalException("Tipo de documento não é Conhecimento de Transporte");
-        }
-    }
-
     public static DocumentoFiscal novoDocumento(File arquivo) throws IOException, JAXBException, GeradorDocumentoFiscalException {
         GeradorDocumentoFiscal.xml = null;
         GeradorDocumentoFiscal.xml = lerDocumento(arquivo);

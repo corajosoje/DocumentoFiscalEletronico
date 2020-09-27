@@ -5,10 +5,10 @@
  */
 package br.jefferson.documentoFiscal.dados;
 
+import br.jefferson.conhecimento3a.CteProc;
 import br.jefferson.documentoFiscal.GeradorDocumentoFiscal;
 import br.jefferson.documentoFiscal.dados.cadastro.Destinatario;
 import br.jefferson.documentoFiscal.dados.cadastro.Emitente;
-import br.jefferson.documentoFiscal.exception.GeradorDocumentoFiscalException;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
@@ -21,11 +21,21 @@ import java.util.logging.Logger;
  */
 public class ConhecimentoTranporte implements DocumentoFiscal {
 
+    private static CteProc CTe;
+
+    public ConhecimentoTranporte() {
+        if (GeradorDocumentoFiscal.xml instanceof CteProc) {
+            CTe = (CteProc) GeradorDocumentoFiscal.xml;
+        } else {
+            throw new IllegalStateException("Documento Inválido");
+        }
+    }
+
     @Override
     public Date getDataEmissao() {
         try {
-            return GeradorDocumentoFiscal.FORMAT.parse(GeradorDocumentoFiscal.getConhecimentoTransporte().getCTe().getInfCte().getIde().getDhEmi().substring(0, 10));
-        } catch (GeradorDocumentoFiscalException | NullPointerException | ParseException ex) {
+            return GeradorDocumentoFiscal.FORMAT.parse(CTe.getCTe().getInfCte().getIde().getDhEmi().substring(0, 10));
+        } catch (NullPointerException | ParseException ex) {
             Logger.getLogger(NotaFiscal.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
@@ -34,8 +44,8 @@ public class ConhecimentoTranporte implements DocumentoFiscal {
     @Override
     public String getChave() {
         try {
-            return GeradorDocumentoFiscal.getConhecimentoTransporte().getProtCTe().getInfProt().getChCTe();
-        } catch (GeradorDocumentoFiscalException | NullPointerException ex) {
+            return CTe.getProtCTe().getInfProt().getChCTe();
+        } catch (NullPointerException ex) {
             Logger.getLogger(NotaFiscal.class.getName()).log(Level.SEVERE, null, ex);
             return "";
         }
@@ -58,14 +68,14 @@ public class ConhecimentoTranporte implements DocumentoFiscal {
 
     @Override
     public List<Item> getItens() {
-       throw new UnsupportedOperationException("Metodo não suportado"); 
+        throw new UnsupportedOperationException("Metodo não suportado");
     }
 
     @Override
     public String getNumero() {
         try {
-            return GeradorDocumentoFiscal.getConhecimentoTransporte().getCTe().getInfCte().getIde().getNCT();
-        } catch (GeradorDocumentoFiscalException | NullPointerException ex) {
+            return CTe.getCTe().getInfCte().getIde().getNCT();
+        } catch (NullPointerException ex) {
             Logger.getLogger(NotaFiscal.class.getName()).log(Level.SEVERE, null, ex);
             return "";
         }
@@ -74,8 +84,8 @@ public class ConhecimentoTranporte implements DocumentoFiscal {
     @Override
     public String getSerie() {
         try {
-            return GeradorDocumentoFiscal.getConhecimentoTransporte().getCTe().getInfCte().getIde().getSerie();
-        } catch (GeradorDocumentoFiscalException | NullPointerException ex) {
+            return CTe.getCTe().getInfCte().getIde().getSerie();
+        } catch (NullPointerException ex) {
             Logger.getLogger(NotaFiscal.class.getName()).log(Level.SEVERE, null, ex);
             return "";
         }
@@ -83,18 +93,18 @@ public class ConhecimentoTranporte implements DocumentoFiscal {
 
     @Override
     public Totais getTotais() {
-        throw new UnsupportedOperationException("Metodo não suportado"); 
+        throw new UnsupportedOperationException("Metodo não suportado");
     }
 
     @Override
     public String getSituacaoDestinatario() {
-        throw new UnsupportedOperationException("Metodo não suportado"); 
+        throw new UnsupportedOperationException("Metodo não suportado");
     }
 
     @Override
     public String getFinalidadeNFe() {
         try {
-            switch (GeradorDocumentoFiscal.getConhecimentoTransporte().getCTe().getInfCte().getIde().getTpCTe()) {
+            switch (CTe.getCTe().getInfCte().getIde().getTpCTe()) {
                 case "0":
                     return "Normal";
                 case "1":
@@ -106,7 +116,7 @@ public class ConhecimentoTranporte implements DocumentoFiscal {
                 default:
                     return "";
             }
-        } catch (GeradorDocumentoFiscalException | NullPointerException ex) {
+        } catch (NullPointerException ex) {
             Logger.getLogger(NotaFiscal.class.getName()).log(Level.SEVERE, null, ex);
             return "";
         }
@@ -114,7 +124,7 @@ public class ConhecimentoTranporte implements DocumentoFiscal {
 
     @Override
     public String getTipoOperacao() {
-        throw new UnsupportedOperationException("Metodo não suportado"); 
+        throw new UnsupportedOperationException("Metodo não suportado");
     }
 
 }
