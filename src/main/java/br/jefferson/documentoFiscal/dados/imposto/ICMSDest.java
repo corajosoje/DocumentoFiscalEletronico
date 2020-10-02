@@ -6,6 +6,7 @@
 package br.jefferson.documentoFiscal.dados.imposto;
 
 import br.jefferson.documentoFiscal.dados.Item;
+import br.jefferson.documentoFiscal.util.Util;
 import br.jefferson.notafiscal4.TNFe;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,27 +25,24 @@ public class ICMSDest {
 
     public String getAliqICMSDest() {
         try {
-            return dest.getPICMSUFDest();
+            return Util.notNull(dest.getPICMSUFDest());
         } catch (NullPointerException ex) {
-            Logger.getLogger(ICMSDest.class.getName()).log(Level.SEVERE, null, ex);
             return "0";
         }
     }
 
     public String getICMSUFDestino() {
         try {
-            return dest.getVICMSUFDest();
+            return Util.notNull(dest.getVICMSUFDest());
         } catch (NullPointerException ex) {
-            Logger.getLogger(ICMSDest.class.getName()).log(Level.SEVERE, null, ex);
             return "0";
         }
     }
 
     public String getICMSUFRemetente() {
         try {
-            return dest.getVICMSUFRemet();
+            return Util.notNull(dest.getVICMSUFRemet());
         } catch (NullPointerException ex) {
-            Logger.getLogger(ICMSDest.class.getName()).log(Level.SEVERE, null, ex);
             return "0";
         }
     }

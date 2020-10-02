@@ -11,12 +11,11 @@ import br.jefferson.documentoFiscal.dados.imposto.PIS;
 import br.jefferson.documentoFiscal.dados.imposto.ICMS;
 import br.jefferson.documentoFiscal.dados.imposto.ICMSDest;
 import br.jefferson.documentoFiscal.dados.imposto.Imposto;
+import br.jefferson.documentoFiscal.dados.imposto.ICMSST;
+import br.jefferson.documentoFiscal.util.Util;
 import br.jefferson.notafiscal4.TIpi;
 import br.jefferson.notafiscal4.TNFe;
-import br.jefferson.documentoFiscal.dados.imposto.ICMSST;
 import br.jefferson.notafiscal4.TNFe.InfNFe.Det.Imposto.ICMSUFDest;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -38,9 +37,8 @@ public class Item {
 
     public String getNumeroItem() {
         try {
-            return det.getNItem();
+            return Util.notNull(det.getNItem());
         } catch (NullPointerException ex) {
-            Logger.getLogger(Item.class.getName()).log(Level.SEVERE, null, ex);
             return "0";
         }
     }
@@ -57,81 +55,72 @@ public class Item {
 
     public String getCfop() {
         try {
-            return det.getProd().getCFOP();
+            return Util.notNull(det.getProd().getCFOP());
         } catch (NullPointerException ex) {
-            Logger.getLogger(Item.class.getName()).log(Level.SEVERE, null, ex);
             return "";
         }
     }
 
     public String getValorUnitario() {
         try {
-            return det.getProd().getVUnTrib();
+            return Util.notNull(det.getProd().getVUnTrib());
         } catch (NullPointerException ex) {
-            Logger.getLogger(Item.class.getName()).log(Level.SEVERE, null, ex);
             return "0";
         }
     }
 
     public String getQuantidade() {
         try {
-            return det.getProd().getQTrib();
+            return Util.notNull(det.getProd().getQTrib());
         } catch (NullPointerException ex) {
-            Logger.getLogger(Item.class.getName()).log(Level.SEVERE, null, ex);
             return "0";
         }
     }
 
     public String getValorTotal() {
         try {
-            return det.getProd().getVProd();
+            return Util.notNull(det.getProd().getVProd());
         } catch (NullPointerException ex) {
-            Logger.getLogger(Item.class.getName()).log(Level.SEVERE, null, ex);
             return "0";
         }
     }
 
     public String getValorUnit() {
         try {
-            return det.getProd().getVUnTrib();
+            return Util.notNull(det.getProd().getVUnTrib());
         } catch (NullPointerException ex) {
-            Logger.getLogger(Item.class.getName()).log(Level.SEVERE, null, ex);
             return "0";
         }
     }
 
     public String getValorDesconto() {
         try {
-            return det.getProd().getVDesc();
+            return Util.notNull(det.getProd().getVDesc());
         } catch (NullPointerException ex) {
-            Logger.getLogger(Item.class.getName()).log(Level.SEVERE, null, ex);
             return "0";
         }
     }
 
     public String getDespesasAcessorias() {
         try {
-            return det.getProd().getVOutro();
+            return Util.notNull(det.getProd().getVOutro());
         } catch (NullPointerException ex) {
-            Logger.getLogger(Item.class.getName()).log(Level.SEVERE, null, ex);
             return "0";
         }
     }
 
     public String getValorfrete() {
         try {
-            return det.getProd().getVFrete();
+            return Util.notNull(det.getProd().getVFrete());
         } catch (NullPointerException ex) {
-            Logger.getLogger(Item.class.getName()).log(Level.SEVERE, null, ex);
             return "0";
         }
     }
 
     public String getValorSeguro() {
         try {
-            return det.getProd().getVSeg();
+            return Util.notNull(det.getProd().getVSeg());
         } catch (NullPointerException ex) {
-            Logger.getLogger(Item.class.getName()).log(Level.SEVERE, null, ex);
             return "0";
         }
     }
@@ -182,37 +171,33 @@ public class Item {
 
     public String getDesconto() {
         try {
-            return det.getProd().getVDesc();
+            return Util.notNull(det.getProd().getVDesc());
         } catch (NullPointerException ex) {
-            Logger.getLogger(Item.class.getName()).log(Level.SEVERE, null, ex);
             return "0";
         }
     }
 
     public String getIPIDevolvido() {
         try {
-            return det.getImpostoDevol().getIPI().getVIPIDevol();
+            return Util.notNull(det.getImpostoDevol().getIPI().getVIPIDevol());
         } catch (NullPointerException ex) {
-            Logger.getLogger(Item.class.getName()).log(Level.SEVERE, null, ex);
             return "0";
         }
     }
 
     public String getInfoAdc() {
         try {
-            return det.getInfAdProd();
+            return Util.notNull(det.getInfAdProd());
         } catch (NullPointerException ex) {
-            Logger.getLogger(Item.class.getName()).log(Level.SEVERE, null, ex);
-            return "0";
+            return "";
         }
     }
 
     public String getFCI() {
         try {
-            return det.getProd().getNFCI();
+            return Util.notNull(det.getProd().getNFCI());
         } catch (NullPointerException ex) {
-            Logger.getLogger(Item.class.getName()).log(Level.SEVERE, null, ex);
-            return "0";
+            return "";
         }
     }
 }

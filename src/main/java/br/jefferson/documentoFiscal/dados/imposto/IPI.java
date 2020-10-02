@@ -5,7 +5,6 @@
  */
 package br.jefferson.documentoFiscal.dados.imposto;
 
-import br.jefferson.documentoFiscal.dados.imposto.Imposto;
 import br.jefferson.notafiscal4.TIpi;
 
 /**
@@ -23,7 +22,7 @@ public class IPI implements Imposto {
     @Override
     public String getCST() {
         if (ipi.getIPITrib() != null) {
-            return ipi.getIPINT().getCST();
+            return ipi.getIPITrib().getCST();
         } else if (ipi.getIPINT() != null) {
             return ipi.getIPINT().getCST();
         } else {
@@ -37,7 +36,7 @@ public class IPI implements Imposto {
         if (ipi.getIPITrib() != null) {
             return ipi.getIPITrib().getVBC();
         } else {
-            return "";
+            return "0";
         }
 
     }
@@ -47,7 +46,7 @@ public class IPI implements Imposto {
         if (ipi.getIPITrib() != null) {
             return ipi.getIPITrib().getPIPI();
         } else {
-            return "";
+            return "0";
         }
     }
 
@@ -56,7 +55,7 @@ public class IPI implements Imposto {
         if (ipi.getIPITrib() != null) {
             return ipi.getIPITrib().getVIPI();
         } else {
-            return "";
+            return "0";
         }
     }
     
