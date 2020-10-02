@@ -23,7 +23,7 @@ public interface DocumentoFiscal {
     public Emitente getEmitente();
 
     public Destinatario getDestinatario();
-    
+
     public java.util.List<Item> getItens();// Ainda falta os impostos
 
     public String getNumero();
@@ -37,4 +37,10 @@ public interface DocumentoFiscal {
     public String getFinalidadeNFe();
 
     public String getTipoOperacao();
+
+    public String getNaturezaOperacao();
+
+    public String getInfoAdicionais();
+
+    public String getInfoFisco();
 }

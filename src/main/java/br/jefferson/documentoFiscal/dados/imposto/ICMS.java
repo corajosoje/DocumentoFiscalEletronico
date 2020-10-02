@@ -327,42 +327,4 @@ public class ICMS implements Imposto {
         }
     }
 
-    public String getAliquotaPartilha() {
-        if (icms.getICMS00() != null) {
-            return icms.getICMS00().getPFCP();
-        } else if (icms.getICMS10() != null) {
-            return icms.getICMS10().getPFCP();
-        } else if (icms.getICMS20() != null) {
-            return icms.getICMS20().getPFCP();
-        } else if (icms.getICMS30() != null) {
-            return "0";
-        } else if (icms.getICMS40() != null) {
-            return "0";
-        } else if (icms.getICMS51() != null) {
-            return icms.getICMS51().getPFCP();
-        } else if (icms.getICMS60() != null) {
-            return "0";
-        } else if (icms.getICMS70() != null) {
-            return icms.getICMS70().getPFCP();
-        } else if (icms.getICMS90() != null) {
-            return icms.getICMS90().getPFCP();
-        } else if (icms.getICMSPart() != null) {
-            return "0";
-        } else if (icms.getICMSSN101() != null) {
-            return "0";
-        } else if (icms.getICMSSN102() != null) {
-            return "0";
-        } else if (icms.getICMSSN201() != null) {
-            return "0";
-        } else if (icms.getICMSSN202() != null) {
-            return "0";
-        } else if (icms.getICMSSN500() != null) {
-            return "0";
-        } else if (icms.getICMSSN900() != null) {
-            return "0";
-        } else {
-            return "0";
-        }
-    }
-
 }

@@ -9,10 +9,12 @@ import br.jefferson.documentoFiscal.dados.imposto.COFINS;
 import br.jefferson.documentoFiscal.dados.imposto.IPI;
 import br.jefferson.documentoFiscal.dados.imposto.PIS;
 import br.jefferson.documentoFiscal.dados.imposto.ICMS;
+import br.jefferson.documentoFiscal.dados.imposto.ICMSDest;
 import br.jefferson.documentoFiscal.dados.imposto.Imposto;
 import br.jefferson.notafiscal4.TIpi;
 import br.jefferson.notafiscal4.TNFe;
 import br.jefferson.documentoFiscal.dados.imposto.ICMSST;
+import br.jefferson.notafiscal4.TNFe.InfNFe.Det.Imposto.ICMSUFDest;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -25,6 +27,7 @@ public class Item {
     private TNFe.InfNFe.Det.Imposto.ICMS icms = null;
     private TNFe.InfNFe.Det.Imposto.COFINS cofins = null;
     private TNFe.InfNFe.Det.Imposto.PIS pis = null;
+    private TNFe.InfNFe.Det.Imposto.ICMSUFDest dest = null;
     private TIpi ipi = null;
     private final TNFe.InfNFe.Det det;
 
@@ -147,12 +150,18 @@ public class Item {
                 this.pis = (TNFe.InfNFe.Det.Imposto.PIS) element.getValue();
             } else if (element.getValue() instanceof TIpi) {
                 this.ipi = (TIpi) element.getValue();
+            } else if (element.getValue() instanceof ICMSUFDest) {
+                this.dest = (ICMSUFDest) element.getValue();
             }
         });
     }
 
     public ICMS getICMS() {
         return new ICMS(icms);
+    }
+
+    public ICMSDest getICMSDest() {
+        return new ICMSDest(dest);
     }
 
     public ICMSST getICMSST() {
@@ -183,6 +192,24 @@ public class Item {
     public String getIPIDevolvido() {
         try {
             return det.getImpostoDevol().getIPI().getVIPIDevol();
+        } catch (NullPointerException ex) {
+            Logger.getLogger(Item.class.getName()).log(Level.SEVERE, null, ex);
+            return "0";
+        }
+    }
+
+    public String getInfoAdc() {
+        try {
+            return det.getInfAdProd();
+        } catch (NullPointerException ex) {
+            Logger.getLogger(Item.class.getName()).log(Level.SEVERE, null, ex);
+            return "0";
+        }
+    }
+
+    public String getFCI() {
+        try {
+            return det.getProd().getNFCI();
         } catch (NullPointerException ex) {
             Logger.getLogger(Item.class.getName()).log(Level.SEVERE, null, ex);
             return "0";

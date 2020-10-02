@@ -161,4 +161,33 @@ public class NotaFiscal implements DocumentoFiscal {
         return itens;
     }
 
+    @Override
+    public String getNaturezaOperacao() {
+        try {
+            return NFe.getNFe().getInfNFe().getIde().getNatOp();
+        } catch (NullPointerException ex) {
+            Logger.getLogger(NotaFiscal.class.getName()).log(Level.SEVERE, null, ex);
+            return "";
+        }
+    }
+
+    @Override
+    public String getInfoAdicionais() {
+        try {
+            return NFe.getNFe().getInfNFe().getInfAdic().getInfCpl();
+        } catch (NullPointerException ex) {
+            Logger.getLogger(NotaFiscal.class.getName()).log(Level.SEVERE, null, ex);
+            return "";
+        }
+    }
+
+    @Override
+    public String getInfoFisco() {
+        try {
+            return NFe.getNFe().getInfNFe().getInfAdic().getInfAdFisco();
+        } catch (NullPointerException ex) {
+            Logger.getLogger(NotaFiscal.class.getName()).log(Level.SEVERE, null, ex);
+            return "";
+        }
+    }
 }

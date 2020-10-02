@@ -127,4 +127,33 @@ public class ConhecimentoTranporte implements DocumentoFiscal {
         throw new UnsupportedOperationException("Metodo não suportado");
     }
 
+    @Override
+    public String getNaturezaOperacao() {
+        try {
+            throw new UnsupportedOperationException("Metodo não suportado");
+        } catch (NullPointerException ex) {
+            Logger.getLogger(NotaFiscal.class.getName()).log(Level.SEVERE, null, ex);
+            return "";
+        }
+    }
+
+    @Override
+    public String getInfoAdicionais() {
+        try {
+            throw new UnsupportedOperationException("Metodo não suportado");
+        } catch (NullPointerException ex) {
+            Logger.getLogger(NotaFiscal.class.getName()).log(Level.SEVERE, null, ex);
+            return "";
+        }
+    }
+
+    @Override
+    public String getInfoFisco() {
+        try {
+            throw new UnsupportedOperationException("Metodo não suportado");
+        } catch (NullPointerException ex) {
+            Logger.getLogger(NotaFiscal.class.getName()).log(Level.SEVERE, null, ex);
+            return "";
+        }
+    }
 }
