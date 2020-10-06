@@ -17,7 +17,7 @@ import java.util.logging.Logger;
  * @author jeffersonsvo
  */
 public class Totais {
- 
+
     private static TNfeProc NFe;
     private static CteProc CTe;
 
@@ -32,6 +32,7 @@ public class Totais {
             throw new IllegalStateException("Documento Inválido");
         }
     }
+
     public String getTotalItens() {
         try {
             return Util.notNull(NFe.getNFe().getInfNFe().getTotal().getICMSTot().getVProd());
@@ -57,7 +58,7 @@ public class Totais {
     }
 
     public String getFrete() {
-       try {
+        try {
             return Util.notNull(NFe.getNFe().getInfNFe().getTotal().getICMSTot().getVFrete());
         } catch (NullPointerException ex) {
             return "0";
@@ -90,7 +91,7 @@ public class Totais {
     }
 
     public String getBaseIcmsST() {
-     try {
+        try {
             return Util.notNull(NFe.getNFe().getInfNFe().getTotal().getICMSTot().getVBCST());
         } catch (NullPointerException ex) {
             return "0";
@@ -98,7 +99,7 @@ public class Totais {
     }
 
     public String getValorIcmsST() {
-       try {
+        try {
             return Util.notNull(NFe.getNFe().getInfNFe().getTotal().getICMSTot().getVST());
         } catch (NullPointerException ex) {
             return "0";
@@ -106,7 +107,7 @@ public class Totais {
     }
 
     public String getValorFcpST() {
-         try {
+        try {
             return Util.notNull(NFe.getNFe().getInfNFe().getTotal().getICMSTot().getVFCPST());
         } catch (NullPointerException ex) {
             return "0";
@@ -114,7 +115,7 @@ public class Totais {
     }
 
     public String getValorIpi() {
-         try {
+        try {
             return Util.notNull(NFe.getNFe().getInfNFe().getTotal().getICMSTot().getVIPI());
         } catch (NullPointerException ex) {
             return "0";
@@ -130,7 +131,7 @@ public class Totais {
     }
 
     public String getValorPis() {
-         try {
+        try {
             return Util.notNull(NFe.getNFe().getInfNFe().getTotal().getICMSTot().getVPIS());
         } catch (NullPointerException ex) {
             return "0";
@@ -138,7 +139,7 @@ public class Totais {
     }
 
     public String getValorCofins() {
-         try {
+        try {
             return Util.notNull(NFe.getNFe().getInfNFe().getTotal().getICMSTot().getVCOFINS());
         } catch (NullPointerException ex) {
             return "0";
@@ -147,7 +148,11 @@ public class Totais {
 
     public String getTotal() {
         try {
-            return Util.notNull(NFe.getNFe().getInfNFe().getTotal().getICMSTot().getVNF());
+            if (NFe == null) {
+                return Util.notNull(CTe.getCTe().getInfCte().getVPrest().getVTPrest());
+            } else {
+                return Util.notNull(NFe.getNFe().getInfNFe().getTotal().getICMSTot().getVNF());
+            }
         } catch (NullPointerException ex) {
             return "0";
         }
@@ -160,6 +165,5 @@ public class Totais {
             return "0";
         }
     }
-    
-    
+
 }

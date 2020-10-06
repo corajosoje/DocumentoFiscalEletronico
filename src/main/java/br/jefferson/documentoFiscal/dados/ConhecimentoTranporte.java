@@ -5,6 +5,7 @@
  */
 package br.jefferson.documentoFiscal.dados;
 
+import br.jefferson.documentoFiscal.dados.transporte.DadosTransporte;
 import br.jefferson.conhecimento3a.CteProc;
 import br.jefferson.documentoFiscal.GeradorDocumentoFiscal;
 import br.jefferson.documentoFiscal.dados.cadastro.Destinatario;
@@ -129,12 +130,7 @@ public class ConhecimentoTranporte implements DocumentoFiscal {
 
     @Override
     public String getNaturezaOperacao() {
-        try {
-            throw new UnsupportedOperationException("Metodo não suportado");
-        } catch (NullPointerException ex) {
-            Logger.getLogger(NotaFiscal.class.getName()).log(Level.SEVERE, null, ex);
-            return "";
-        }
+        return "Conhecimento de transporte";
     }
 
     @Override
@@ -155,5 +151,10 @@ public class ConhecimentoTranporte implements DocumentoFiscal {
             Logger.getLogger(NotaFiscal.class.getName()).log(Level.SEVERE, null, ex);
             return "";
         }
+    }
+
+    @Override
+    public DadosTransporte getDadosTransporte() {
+        return new DadosTransporte();
     }
 }

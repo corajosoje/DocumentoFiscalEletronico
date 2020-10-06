@@ -5,6 +5,7 @@
  */
 package br.jefferson.documentoFiscal.dados;
 
+import br.jefferson.documentoFiscal.dados.transporte.DadosTransporte;
 import br.jefferson.documentoFiscal.dados.cadastro.Emitente;
 import br.jefferson.documentoFiscal.dados.cadastro.Destinatario;
 
@@ -24,7 +25,9 @@ public interface DocumentoFiscal {
 
     public Destinatario getDestinatario();
 
-    public java.util.List<Item> getItens();// Ainda falta os impostos
+    public java.util.List<Item> getItens();
+    
+    public DadosTransporte getDadosTransporte();
 
     public String getNumero();
 

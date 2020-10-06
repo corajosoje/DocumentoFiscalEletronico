@@ -5,6 +5,7 @@
  */
 package br.jefferson.documentoFiscal.dados;
 
+import br.jefferson.documentoFiscal.dados.transporte.DadosTransporte;
 import br.jefferson.documentoFiscal.dados.cadastro.Emitente;
 import br.jefferson.documentoFiscal.dados.cadastro.Destinatario;
 import br.jefferson.documentoFiscal.GeradorDocumentoFiscal;
@@ -188,6 +189,16 @@ public class NotaFiscal implements DocumentoFiscal {
         } catch (NullPointerException ex) {
             Logger.getLogger(NotaFiscal.class.getName()).log(Level.SEVERE, null, ex);
             return "";
+        }
+    }
+
+    @Override
+    public DadosTransporte getDadosTransporte() {
+        try {
+            throw new UnsupportedOperationException("Metodo não suportado");
+        } catch (NullPointerException ex) {
+            Logger.getLogger(NotaFiscal.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
         }
     }
 }
