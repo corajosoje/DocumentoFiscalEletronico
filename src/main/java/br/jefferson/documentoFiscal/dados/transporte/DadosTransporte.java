@@ -26,8 +26,49 @@ public class DadosTransporte {
         }
     }
 
+    public ICMSTransporte getICMSTransporte() {
+        return new ICMSTransporte();
+    }
+
     public Remetente getRemetente() {
         return new Remetente();
+    }
+
+    public String getQtdeNfTransportada() {
+        switch (CTe.getCTe().getInfCte().getIde().getTpCTe()) {
+            case "0":
+                int soma = 0;
+                if (CTe.getCTe().getInfCte().getInfCTeNorm().getInfDoc().getInfNF() != null) {
+                    soma = soma + CTe.getCTe().getInfCte().getInfCTeNorm().getInfDoc().getInfNF().size();
+                }
+                if (CTe.getCTe().getInfCte().getInfCTeNorm().getInfDoc().getInfNFe() != null) {
+                    soma = soma + CTe.getCTe().getInfCte().getInfCTeNorm().getInfDoc().getInfNFe().size();
+                }
+                if (CTe.getCTe().getInfCte().getInfCTeNorm().getInfDoc().getInfOutros() != null) {
+                    soma = soma + CTe.getCTe().getInfCte().getInfCTeNorm().getInfDoc().getInfOutros().size();
+                }
+                return String.valueOf(soma);
+            case "1":
+                if (CTe.getCTe().getInfCte().getInfCteComp().getChCTe() != null) {
+                    return "1";
+                } else {
+                    return "0";
+                }
+            case "2":
+                if (CTe.getCTe().getInfCte().getInfCteAnu().getChCte() != null) {
+                    return "1";
+                } else {
+                    return "0";
+                }
+            case "3":
+                if (CTe.getCTe().getInfCte().getInfCTeNorm().getInfCteSub().getChCte() != null) {
+                    return "1";
+                } else {
+                    return "0";
+                }
+            default:
+                return "0";
+        }
     }
 
     public Destinatario getDestinatario() {
