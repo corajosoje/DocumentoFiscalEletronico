@@ -94,7 +94,7 @@ public class ConhecimentoTranporte implements DocumentoFiscal {
 
     @Override
     public Totais getTotais() {
-        throw new UnsupportedOperationException("Metodo não suportado");
+        return new Totais();
     }
 
     @Override
