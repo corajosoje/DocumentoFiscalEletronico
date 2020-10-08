@@ -6,9 +6,12 @@
 package br.jefferson.documentoFiscal.dados.transporte;
 
 import br.jefferson.conhecimento3a.CteProc;
+import br.jefferson.conhecimento3a.TCTe;
 import br.jefferson.documentoFiscal.GeradorDocumentoFiscal;
 import br.jefferson.documentoFiscal.util.Util;
 import br.jefferson.notafiscal4.TNfeProc;
+import java.util.HashSet;
+import java.util.List;
 
 /**
  *
@@ -32,6 +35,34 @@ public class DadosTransporte {
 
     public Remetente getRemetente() {
         return new Remetente();
+    }
+
+    public java.util.List<String> getNFTransportada() {
+        java.util.List<String> notas = new java.util.ArrayList<>();
+        switch (CTe.getCTe().getInfCte().getIde().getTpCTe()) {
+            case "0":
+                CTe.getCTe().getInfCte().getInfCTeNorm().getInfDoc().getInfNFe().forEach((infNFe) -> {
+                    notas.add(Util.notNull(infNFe.getChave()));
+                });
+                CTe.getCTe().getInfCte().getInfCTeNorm().getInfDoc().getInfNF().forEach((infNFe) -> {
+                    notas.add(Util.notNull(infNFe.getNDoc()));
+                });
+                CTe.getCTe().getInfCte().getInfCTeNorm().getInfDoc().getInfOutros().forEach((infNFe) -> {
+                    notas.add(Util.notNull(infNFe.getNDoc()));
+                });
+                break;
+
+            case "1":
+                notas.add(Util.notNull(CTe.getCTe().getInfCte().getInfCteComp().getChCTe()));
+                break;
+            case "2":
+                notas.add(Util.notNull(CTe.getCTe().getInfCte().getInfCteAnu().getChCte()));
+                break;
+            case "3":
+                notas.add(Util.notNull(CTe.getCTe().getInfCte().getInfCTeNorm().getInfCteSub().getChCte()));
+                break;
+        }
+        return notas;
     }
 
     public String getQtdeNfTransportada() {

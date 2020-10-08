@@ -5,6 +5,7 @@
  */
 package br.jefferson.documentoFiscal.dados;
 
+import br.jefferson.documentoFiscal.util.Util;
 import br.jefferson.notafiscal4.TNFe;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,54 +23,56 @@ public class DadosProduto {
 
     public String getCEST() {
         try {
-            return det.getProd().getNCM();
+            return Util.notNull(det.getProd().getNCM());
         } catch (NullPointerException ex) {
-            Logger.getLogger(Item.class.getName()).log(Level.SEVERE, null, ex);
+            return "";
+        }
+    }
+
+    public String getEAN() {
+        try {
+            return Util.notNull(det.getProd().getCEAN());
+        } catch (NullPointerException ex) {
             return "";
         }
     }
 
     public String getCodigo() {
         try {
-            return det.getProd().getCProd();
+            return Util.notNull(det.getProd().getCProd());
         } catch (NullPointerException ex) {
-            Logger.getLogger(Item.class.getName()).log(Level.SEVERE, null, ex);
             return "0";
         }
     }
 
     public String getDescricao() {
         try {
-            return det.getProd().getXProd();
+            return Util.notNull(det.getProd().getXProd());
         } catch (NullPointerException ex) {
-            Logger.getLogger(Item.class.getName()).log(Level.SEVERE, null, ex);
             return "";
         }
     }
 
     public String getNCM() {
         try {
-            return det.getProd().getNCM();
+            return Util.notNull(det.getProd().getNCM());
         } catch (NullPointerException ex) {
-            Logger.getLogger(Item.class.getName()).log(Level.SEVERE, null, ex);
             return "";
         }
     }
 
     public String getUnidadeMedida() {
         try {
-            return det.getProd().getUTrib();
+            return Util.notNull(det.getProd().getUTrib());
         } catch (NullPointerException ex) {
-            Logger.getLogger(Item.class.getName()).log(Level.SEVERE, null, ex);
             return "";
         }
     }
 
     public String getFCI() {
         try {
-            return det.getProd().getNFCI();
+            return Util.notNull(det.getProd().getNFCI());
         } catch (NullPointerException ex) {
-            Logger.getLogger(Item.class.getName()).log(Level.SEVERE, null, ex);
             return "";
         }
     }
