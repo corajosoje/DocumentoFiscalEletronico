@@ -9,6 +9,7 @@ import br.jefferson.documentoFiscal.dados.transporte.DadosTransporte;
 import br.jefferson.documentoFiscal.dados.cadastro.Emitente;
 import br.jefferson.documentoFiscal.dados.cadastro.Destinatario;
 import br.jefferson.documentoFiscal.GeradorDocumentoFiscal;
+import br.jefferson.documentoFiscal.util.Util;
 import br.jefferson.notafiscal4.TNFe;
 import br.jefferson.notafiscal4.TNfeProc;
 import java.text.ParseException;
@@ -165,7 +166,7 @@ public class NotaFiscal implements DocumentoFiscal {
     @Override
     public String getNaturezaOperacao() {
         try {
-            return NFe.getNFe().getInfNFe().getIde().getNatOp();
+            return Util.notNull(NFe.getNFe().getInfNFe().getIde().getNatOp());
         } catch (NullPointerException ex) {
             Logger.getLogger(NotaFiscal.class.getName()).log(Level.SEVERE, null, ex);
             return "";
@@ -175,9 +176,8 @@ public class NotaFiscal implements DocumentoFiscal {
     @Override
     public String getInfoAdicionais() {
         try {
-            return NFe.getNFe().getInfNFe().getInfAdic().getInfCpl();
+            return Util.notNull(NFe.getNFe().getInfNFe().getInfAdic().getInfCpl());
         } catch (NullPointerException ex) {
-            Logger.getLogger(NotaFiscal.class.getName()).log(Level.SEVERE, null, ex);
             return "";
         }
     }
@@ -185,9 +185,8 @@ public class NotaFiscal implements DocumentoFiscal {
     @Override
     public String getInfoFisco() {
         try {
-            return NFe.getNFe().getInfNFe().getInfAdic().getInfAdFisco();
+            return Util.notNull(NFe.getNFe().getInfNFe().getInfAdic().getInfAdFisco());
         } catch (NullPointerException ex) {
-            Logger.getLogger(NotaFiscal.class.getName()).log(Level.SEVERE, null, ex);
             return "";
         }
     }

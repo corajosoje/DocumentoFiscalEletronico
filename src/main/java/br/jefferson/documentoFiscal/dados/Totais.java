@@ -9,8 +9,6 @@ import br.jefferson.conhecimento3a.CteProc;
 import br.jefferson.documentoFiscal.GeradorDocumentoFiscal;
 import br.jefferson.documentoFiscal.util.Util;
 import br.jefferson.notafiscal4.TNfeProc;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -69,7 +67,6 @@ public class Totais {
         try {
             return NFe.getNFe().getInfNFe().getTotal().getICMSTot().getVSeg();
         } catch (NullPointerException ex) {
-            Logger.getLogger(Totais.class.getName()).log(Level.SEVERE, null, ex);
             return "0";
         }
     }

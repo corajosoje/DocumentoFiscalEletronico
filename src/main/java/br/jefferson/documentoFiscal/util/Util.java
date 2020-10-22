@@ -17,7 +17,20 @@ public class Util {
         if (retorno == null) {
             throw new NullPointerException();
         } else {
-            return removerCaracteresEspeciais(retorno);
+            if (isNumber(retorno)) {
+                return retorno;
+            } else {
+                return removerCaracteresEspeciais(retorno);
+            }
+        }
+    }
+
+    private static boolean isNumber(String s) {
+        try {
+            double valor = (Double.parseDouble(s));
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
         }
     }
 
@@ -25,6 +38,7 @@ public class Util {
         try {
             string = Normalizer.normalize(string, Normalizer.Form.NFD);
             string = string.replaceAll("[^\\p{ASCII}]", "");
+
             return string;
         } catch (java.lang.NullPointerException e) {
             return "";
