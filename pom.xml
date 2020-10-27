@@ -22,50 +22,66 @@
             <artifactId>log4j-core</artifactId>
             <version>2.13.3</version>
         </dependency>
+        <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+            <version>2.3.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-core</artifactId>
+            <version>2.3.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-impl</artifactId>
+            <version>2.3.3</version>
+        </dependency>
     </dependencies>
         
     <build>
         <plugins>
             <plugin>
-                <groupId>org.jvnet.jaxb2.maven2</groupId>
-                <artifactId>maven-jaxb2-plugin</artifactId>
-                <version>0.12.0</version>
+                <!-- https://www.mojohaus.org/jaxb2-maven-plugin/Documentation/v2.4/index.html -->
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>jaxb2-maven-plugin</artifactId>
+                <version>2.5.0</version>
                 <executions>
-                    
                     <execution>
+                        <id>CTe3</id>
                         <goals>
-                            <goal>generate</goal>
+                            <goal>xjc</goal>
                         </goals>
                         <configuration>
-                            <schemaIncludes>
-                                <include>jaxb/ConhecimentoTransporte3a/*.xsd</include>
-                            </schemaIncludes>
-                            <episodeFile>${project.build.directory}/generated-sources/xjc/META-INF/jaxb-ConhecimentoTransporte3a.episode</episodeFile>
-                            <generatePackage>br.jefferson.conhecimento3a</generatePackage>
+                            <encoding>UTF-8</encoding>
+                            <sourceType>XmlSchema</sourceType>
+                            <addGeneratedAnnotation>false</addGeneratedAnnotation>
+                            <sources>
+                                <source>xsd/ConhecimentoTransporte3a</source>
+                            </sources>
+                            <packageName>br.jefferson.conhecimento3a</packageName>
+                            <outputDirectory>${project.build.directory}/generated-sources/jaxb</outputDirectory>
+                            <clearOutputDir>false</clearOutputDir>
                         </configuration>
-                        <id>jaxb-generate-ConhecimentoTransporte3a</id>
                     </execution>
                     <execution>
+                        <id>NFe4</id>
                         <goals>
-                            <goal>generate</goal>
+                            <goal>xjc</goal>
                         </goals>
                         <configuration>
-                            <schemaIncludes>
-                                <include>jaxb/NotaFiscal4/*.xsd</include>
-                            </schemaIncludes>
-                            <episodeFile>${project.build.directory}/generated-sources/xjc/META-INF/jaxb-NotaFiscal4.episode</episodeFile>
-                            <generatePackage>br.jefferson.notafiscal4</generatePackage>
+                            <encoding>UTF-8</encoding>
+                            <sourceType>XmlSchema</sourceType>
+                            <addGeneratedAnnotation>false</addGeneratedAnnotation>
+                            <sources>
+                                <source>xsd/NotaFiscal4</source>
+                            </sources>
+                            <packageName>br.jefferson.notafiscal4</packageName>
+                            <outputDirectory>${project.build.directory}/generated-sources/jaxb</outputDirectory>
+                            <clearOutputDir>false</clearOutputDir>
                         </configuration>
-                        <id>jaxb-generate-NotaFiscal4</id>
                     </execution>
                 </executions>
-                <configuration>
-                    <catalog>src/main/resources/jaxb/catalog.xml</catalog>
-                    <catalogResolver>org.jvnet.jaxb2.maven2.resolver.tools.ClasspathCatalogResolver</catalogResolver>
-                    <forceRegenerate>true</forceRegenerate>
-                    <generateDirectory>${project.build.directory}/generated-sources/xjc</generateDirectory>
-                    <verbose>true</verbose>
-                </configuration>
             </plugin>
         </plugins>
     </build>
