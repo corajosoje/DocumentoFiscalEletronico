@@ -9,6 +9,7 @@ import br.jefferson.documentoFiscal.dados.transporte.DadosTransporte;
 import br.jefferson.documentoFiscal.dados.cadastro.Emitente;
 import br.jefferson.documentoFiscal.dados.cadastro.Destinatario;
 import br.jefferson.documentoFiscal.GeradorDocumentoFiscal;
+import br.jefferson.documentoFiscal.exception.GeradorDocumentoFiscalException;
 import br.jefferson.documentoFiscal.util.Util;
 import br.jefferson.notafiscal4.TNFe;
 import br.jefferson.notafiscal4.TNfeProc;
@@ -24,11 +25,11 @@ public class NotaFiscal implements DocumentoFiscal {
 
     private static TNfeProc NFe;
 
-    public NotaFiscal() {
+    public NotaFiscal() throws GeradorDocumentoFiscalException {
         if (GeradorDocumentoFiscal.xml instanceof TNfeProc) {
             NFe = (TNfeProc) GeradorDocumentoFiscal.xml;
         } else {
-            throw new IllegalStateException("Documento Inválido");
+            throw new GeradorDocumentoFiscalException("Documento Inválido");
         }
     }
 

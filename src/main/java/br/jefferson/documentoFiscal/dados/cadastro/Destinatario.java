@@ -7,6 +7,7 @@ package br.jefferson.documentoFiscal.dados.cadastro;
 
 import br.jefferson.conhecimento3a.CteProc;
 import br.jefferson.documentoFiscal.GeradorDocumentoFiscal;
+import br.jefferson.documentoFiscal.util.Util;
 import br.jefferson.notafiscal4.TNfeProc;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -41,7 +42,7 @@ public class Destinatario {
         try {
             switch (GeradorDocumentoFiscal.modelo) {
                 case 55:
-                    return NFe.getNFe().getInfNFe().getDest().getCNPJ();
+                    return Util.notNull(NFe.getNFe().getInfNFe().getDest().getCNPJ());
                 case 57:
                     if (CTe.getCTe().getInfCte().getIde().getToma3().getToma() == null) {
                         return CTe.getCTe().getInfCte().getIde().getToma4().getCNPJ();
@@ -63,7 +64,6 @@ public class Destinatario {
                     return "";
             }
         } catch (NullPointerException ex) {
-            Logger.getLogger(Destinatario.class.getName()).log(Level.SEVERE, null, ex);
             return "";
         }
 
