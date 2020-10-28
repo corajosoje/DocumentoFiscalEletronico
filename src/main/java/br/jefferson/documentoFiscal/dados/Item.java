@@ -44,11 +44,17 @@ public class Item {
     }
 
     public String getValorContabil() {
-        double total = Double.parseDouble(getICMSST().getICMSST())
+        double total
+                = Double.parseDouble(getICMSST().getICMSST())
                 + Double.parseDouble(getValorTotal())
                 + Double.parseDouble(getValorfrete())
                 + Double.parseDouble(getValorSeguro())
-                - Double.parseDouble(getDesconto());
+                + Double.parseDouble(getDespesasAcessorias())
+                + Double.parseDouble(getICMSST().getValorFCPST())
+                + Double.parseDouble(getIPI().getValor())
+                + Double.parseDouble(getIPIDevolvido())
+                - Double.parseDouble(getDesconto())
+                - Double.parseDouble(getICMS().getICMSDesonerado());
 
         return String.valueOf(total);
     }
