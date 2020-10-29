@@ -5,6 +5,7 @@
  */
 package br.jefferson.documentoFiscal.dados.imposto;
 
+import br.jefferson.documentoFiscal.util.Util;
 import br.jefferson.notafiscal4.TIpi;
 
 /**
@@ -21,43 +22,60 @@ public class IPI implements Imposto {
 
     @Override
     public String getCST() {
-        if (ipi.getIPITrib() != null) {
-            return ipi.getIPITrib().getCST();
-        } else if (ipi.getIPINT() != null) {
-            return ipi.getIPINT().getCST();
-        } else {
+        if (ipi == null) {
             return "";
+        } else {
+            if (ipi.getIPITrib() != null) {
+                return ipi.getIPITrib().getCST();
+            } else if (ipi.getIPINT() != null) {
+                return ipi.getIPINT().getCST();
+            } else {
+                return "";
+            }
         }
-
     }
 
     @Override
     public String getBase() {
-        if (ipi.getIPITrib() != null) {
-            return ipi.getIPITrib().getVBC();
-        } else {
+        if (ipi == null) {
             return "0";
+        } else {
+            if (ipi.getIPITrib() != null) {
+                return ipi.getIPITrib().getVBC();
+            } else {
+                return "0";
+            }
         }
-
     }
 
     @Override
     public String getAliquota() {
-        if (ipi.getIPITrib() != null) {
-            return ipi.getIPITrib().getPIPI();
-        } else {
+        if (ipi == null) {
             return "0";
+        } else {
+            if (ipi.getIPITrib() != null) {
+                return ipi.getIPITrib().getPIPI();
+            } else {
+                return "0";
+            }
         }
     }
 
     @Override
     public String getValor() {
-        if (ipi.getIPITrib() != null) {
-            return ipi.getIPITrib().getVIPI();
-        } else {
+        if (ipi == null) {
             return "0";
+        } else {
+            if (ipi.getIPITrib() != null) {
+                try {
+                    return Util.notNull(ipi.getIPITrib().getVIPI());
+                } catch (NullPointerException ex) {
+                    return "0";
+                }
+            } else {
+                return "0";
+            }
         }
     }
-    
 
 }

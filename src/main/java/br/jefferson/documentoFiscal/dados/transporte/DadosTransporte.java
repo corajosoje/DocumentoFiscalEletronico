@@ -6,12 +6,8 @@
 package br.jefferson.documentoFiscal.dados.transporte;
 
 import br.jefferson.conhecimento3a.CteProc;
-import br.jefferson.conhecimento3a.TCTe;
 import br.jefferson.documentoFiscal.GeradorDocumentoFiscal;
 import br.jefferson.documentoFiscal.util.Util;
-import br.jefferson.notafiscal4.TNfeProc;
-import java.util.HashSet;
-import java.util.List;
 
 /**
  *
