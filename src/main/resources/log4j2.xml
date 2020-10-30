@@ -2,7 +2,9 @@
 <Configuration status="WARN" monitorInterval="30">
     <Properties>
         <Property name="logPath">log</Property>
-        <Property name="rollingFileName">feminiza</Property>
+        <Property name="rollingFileName">DocumentoFiscalEletronico</Property>
+        <Property name="LevelPadrao">ERROR</Property>
+        <Property name="AppenderPadrao">rollingFile</Property>
     </Properties>
   
     <Appenders>
@@ -23,10 +25,10 @@
     </Appenders>
     
     <Loggers>
-        <Logger name="br.jefferson.documentoFiscal.dados.transporte.Recebedor" level="ERROR" additivity="false">
-            <AppenderRef ref="Console"/>
+        <Logger name="br.jefferson.documentoFiscal.dados.transporte.Recebedor" level="${LevelPadrao}" additivity="false">
+            <AppenderRef ref="${AppenderPadrao}"/>
         </Logger>
-        <Logger name="LoggerTest" level="TRACE" additivity="false">
+        <Logger name="LoggerTest" level="DEBUG" additivity="false">
             <AppenderRef ref="Console"/>
         </Logger>
         <Root level="ERROR">

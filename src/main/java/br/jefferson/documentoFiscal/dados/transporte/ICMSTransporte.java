@@ -41,6 +41,8 @@ public class ICMSTransporte implements Imposto {
                 return Util.notNull(CTe.getCTe().getInfCte().getImp().getICMS().getICMS90().getCST());
             } else if (CTe.getCTe().getInfCte().getImp().getICMS().getICMSOutraUF() != null) {
                 return Util.notNull(CTe.getCTe().getInfCte().getImp().getICMS().getICMSOutraUF().getCST());
+            } else if (CTe.getCTe().getInfCte().getImp().getICMS().getICMSSN() != null) {
+                return Util.notNull(CTe.getCTe().getInfCte().getImp().getICMS().getICMSSN().getCST());
             } else {
                 return "";
             }
