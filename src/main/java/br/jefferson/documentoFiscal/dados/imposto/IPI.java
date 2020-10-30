@@ -22,59 +22,75 @@ public class IPI implements Imposto {
 
     @Override
     public String getCST() {
-        if (ipi == null) {
-            return "";
-        } else {
-            if (ipi.getIPITrib() != null) {
-                return ipi.getIPITrib().getCST();
-            } else if (ipi.getIPINT() != null) {
-                return ipi.getIPINT().getCST();
-            } else {
+        try {
+            if (ipi == null) {
                 return "";
+            } else {
+                if (ipi.getIPITrib() != null) {
+                    return Util.notNull(ipi.getIPITrib().getCST());
+                } else if (ipi.getIPINT() != null) {
+                    return Util.notNull(ipi.getIPINT().getCST());
+                } else {
+                    return "";
+                }
             }
+        } catch (NullPointerException ex) {
+            return "";
         }
     }
 
     @Override
     public String getBase() {
-        if (ipi == null) {
-            return "0";
-        } else {
-            if (ipi.getIPITrib() != null) {
-                return ipi.getIPITrib().getVBC();
-            } else {
+        try {
+            if (ipi == null) {
                 return "0";
+            } else {
+                if (ipi.getIPITrib() != null) {
+                    return Util.notNull(ipi.getIPITrib().getVBC());
+                } else {
+                    return "0";
+                }
             }
+        } catch (NullPointerException ex) {
+            return "0";
         }
     }
 
     @Override
     public String getAliquota() {
-        if (ipi == null) {
-            return "0";
-        } else {
-            if (ipi.getIPITrib() != null) {
-                return ipi.getIPITrib().getPIPI();
-            } else {
+        try {
+            if (ipi == null) {
                 return "0";
+            } else {
+                if (ipi.getIPITrib() != null) {
+                    return Util.notNull(ipi.getIPITrib().getPIPI());
+                } else {
+                    return "0";
+                }
             }
+        } catch (NullPointerException ex) {
+            return "0";
         }
     }
 
     @Override
     public String getValor() {
-        if (ipi == null) {
-            return "0";
-        } else {
-            if (ipi.getIPITrib() != null) {
-                try {
-                    return Util.notNull(ipi.getIPITrib().getVIPI());
-                } catch (NullPointerException ex) {
+        try {
+            if (ipi == null) {
+                return "0";
+            } else {
+                if (ipi.getIPITrib() != null) {
+                    try {
+                        return Util.notNull(ipi.getIPITrib().getVIPI());
+                    } catch (NullPointerException ex) {
+                        return "0";
+                    }
+                } else {
                     return "0";
                 }
-            } else {
-                return "0";
             }
+        } catch (NullPointerException ex) {
+            return "0";
         }
     }
 
