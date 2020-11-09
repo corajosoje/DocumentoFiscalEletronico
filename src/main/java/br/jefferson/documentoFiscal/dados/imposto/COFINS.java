@@ -5,6 +5,7 @@
  */
 package br.jefferson.documentoFiscal.dados.imposto;
 
+import br.jefferson.documentoFiscal.util.Util;
 import br.jefferson.notafiscal4.TNFe;
 
 /**
@@ -21,61 +22,77 @@ public class COFINS implements Imposto {
 
     @Override
     public String getCST() {
-        if (cofins.getCOFINSAliq() != null) {
-            return cofins.getCOFINSAliq().getCST();
-        } else if (cofins.getCOFINSNT() != null) {
-            return cofins.getCOFINSNT().getCST();
-        } else if (cofins.getCOFINSOutr() != null) {
-            return cofins.getCOFINSOutr().getCST();
-        } else if (cofins.getCOFINSQtde() != null) {
-            return cofins.getCOFINSQtde().getCST();
-        } else {
-            return null;
+        try {
+            if (cofins.getCOFINSAliq() != null) {
+                return Util.notNull(cofins.getCOFINSAliq().getCST());
+            } else if (cofins.getCOFINSNT() != null) {
+                return Util.notNull(cofins.getCOFINSNT().getCST());
+            } else if (cofins.getCOFINSOutr() != null) {
+                return Util.notNull(cofins.getCOFINSOutr().getCST());
+            } else if (cofins.getCOFINSQtde() != null) {
+                return Util.notNull(cofins.getCOFINSQtde().getCST());
+            } else {
+                return "";
+            }
+        } catch (NullPointerException ex) {
+            return "";
         }
     }
 
     @Override
     public String getBase() {
-        if (cofins.getCOFINSAliq() != null) {
-            return cofins.getCOFINSAliq().getVBC();
-        } else if (cofins.getCOFINSNT() != null) {
+        try {
+            if (cofins.getCOFINSAliq() != null) {
+                return Util.notNull(cofins.getCOFINSAliq().getVBC());
+            } else if (cofins.getCOFINSNT() != null) {
+                return "0";
+            } else if (cofins.getCOFINSOutr() != null) {
+                return Util.notNull(cofins.getCOFINSOutr().getVBC());
+            } else if (cofins.getCOFINSQtde() != null) {
+                return Util.notNull(cofins.getCOFINSQtde().getQBCProd());
+            } else {
+                return "0";
+            }
+        } catch (NullPointerException ex) {
             return "0";
-        } else if (cofins.getCOFINSOutr() != null) {
-            return cofins.getCOFINSOutr().getVBC();
-        } else if (cofins.getCOFINSQtde() != null) {
-            return cofins.getCOFINSQtde().getQBCProd();
-        } else {
-            return null;
         }
     }
 
     @Override
     public String getAliquota() {
-        if (cofins.getCOFINSAliq() != null) {
-            return cofins.getCOFINSAliq().getPCOFINS();
-        } else if (cofins.getCOFINSNT() != null) {
+        try {
+            if (cofins.getCOFINSAliq() != null) {
+                return Util.notNull(cofins.getCOFINSAliq().getPCOFINS());
+            } else if (cofins.getCOFINSNT() != null) {
+                return "0";
+            } else if (cofins.getCOFINSOutr() != null) {
+                return Util.notNull(cofins.getCOFINSOutr().getPCOFINS());
+            } else if (cofins.getCOFINSQtde() != null) {
+                return Util.notNull(cofins.getCOFINSQtde().getVAliqProd());
+            } else {
+                return "0";
+            }
+        } catch (NullPointerException ex) {
             return "0";
-        } else if (cofins.getCOFINSOutr() != null) {
-            return cofins.getCOFINSOutr().getPCOFINS();
-        } else if (cofins.getCOFINSQtde() != null) {
-            return cofins.getCOFINSQtde().getVAliqProd();
-        } else {
-            return null;
         }
     }
 
     @Override
     public String getValor() {
-        if (cofins.getCOFINSAliq() != null) {
-            return cofins.getCOFINSAliq().getVCOFINS();
-        } else if (cofins.getCOFINSNT() != null) {
+        try {
+            if (cofins.getCOFINSAliq() != null) {
+                return Util.notNull(cofins.getCOFINSAliq().getVCOFINS());
+            } else if (cofins.getCOFINSNT() != null) {
+                return "0";
+            } else if (cofins.getCOFINSOutr() != null) {
+                return Util.notNull(cofins.getCOFINSOutr().getVCOFINS());
+            } else if (cofins.getCOFINSQtde() != null) {
+                return Util.notNull(cofins.getCOFINSQtde().getVCOFINS());
+            } else {
+                return "0";
+            }
+        } catch (NullPointerException ex) {
             return "0";
-        } else if (cofins.getCOFINSOutr() != null) {
-            return cofins.getCOFINSOutr().getVCOFINS();
-        } else if (cofins.getCOFINSQtde() != null) {
-            return cofins.getCOFINSQtde().getVCOFINS();
-        } else {
-            return null;
         }
     }
 

@@ -5,6 +5,7 @@
  */
 package br.jefferson.documentoFiscal.dados.imposto;
 
+import br.jefferson.documentoFiscal.util.Util;
 import br.jefferson.notafiscal4.TNFe;
 
 /**
@@ -21,61 +22,77 @@ public class PIS implements Imposto {
 
     @Override
     public String getCST() {
-        if (pis.getPISAliq() != null) {
-            return pis.getPISAliq().getCST();
-        } else if (pis.getPISNT() != null) {
-            return pis.getPISNT().getCST();
-        } else if (pis.getPISOutr() != null) {
-            return pis.getPISOutr().getCST();
-        } else if (pis.getPISQtde() != null) {
-            return pis.getPISQtde().getCST();
-        } else {
-            return null;
+        try {
+            if (pis.getPISAliq() != null) {
+                return Util.notNull(pis.getPISAliq().getCST());
+            } else if (pis.getPISNT() != null) {
+                return Util.notNull(pis.getPISNT().getCST());
+            } else if (pis.getPISOutr() != null) {
+                return Util.notNull(pis.getPISOutr().getCST());
+            } else if (pis.getPISQtde() != null) {
+                return Util.notNull(pis.getPISQtde().getCST());
+            } else {
+                return "";
+            }
+        } catch (NullPointerException ex) {
+            return "";
         }
     }
 
     @Override
     public String getBase() {
-        if (pis.getPISAliq() != null) {
-            return pis.getPISAliq().getVBC();
-        } else if (pis.getPISNT() != null) {
+        try {
+            if (pis.getPISAliq() != null) {
+                return Util.notNull(pis.getPISAliq().getVBC());
+            } else if (pis.getPISNT() != null) {
+                return "0";
+            } else if (pis.getPISOutr() != null) {
+                return Util.notNull(pis.getPISOutr().getVBC());
+            } else if (pis.getPISQtde() != null) {
+                return Util.notNull(pis.getPISQtde().getQBCProd());
+            } else {
+                return null;
+            }
+        } catch (NullPointerException ex) {
             return "0";
-        } else if (pis.getPISOutr() != null) {
-            return pis.getPISOutr().getVBC();
-        } else if (pis.getPISQtde() != null) {
-            return pis.getPISQtde().getQBCProd();
-        } else {
-            return null;
         }
     }
 
     @Override
     public String getAliquota() {
-        if (pis.getPISAliq() != null) {
-            return pis.getPISAliq().getPPIS();
-        } else if (pis.getPISNT() != null) {
+        try {
+            if (pis.getPISAliq() != null) {
+                return Util.notNull(pis.getPISAliq().getPPIS());
+            } else if (pis.getPISNT() != null) {
+                return "0";
+            } else if (pis.getPISOutr() != null) {
+                return Util.notNull(pis.getPISOutr().getPPIS());
+            } else if (pis.getPISQtde() != null) {
+                return Util.notNull(pis.getPISQtde().getVAliqProd());
+            } else {
+                return null;
+            }
+        } catch (NullPointerException ex) {
             return "0";
-        } else if (pis.getPISOutr() != null) {
-            return pis.getPISOutr().getPPIS();
-        } else if (pis.getPISQtde() != null) {
-            return pis.getPISQtde().getVAliqProd();
-        } else {
-            return null;
         }
     }
 
     @Override
     public String getValor() {
-        if (pis.getPISAliq() != null) {
-            return pis.getPISAliq().getVPIS();
-        } else if (pis.getPISNT() != null) {
+        try {
+            if (pis.getPISAliq() != null) {
+                return Util.notNull(pis.getPISAliq().getVPIS());
+            } else if (pis.getPISNT() != null) {
+                return "0";
+            } else if (pis.getPISOutr() != null) {
+                return Util.notNull(pis.getPISOutr().getVPIS());
+            } else if (pis.getPISQtde() != null) {
+                return Util.notNull(pis.getPISQtde().getVPIS());
+            } else {
+                return null;
+            }
+        } catch (NullPointerException ex) {
             return "0";
-        } else if (pis.getPISOutr() != null) {
-            return pis.getPISOutr().getVPIS();
-        } else if (pis.getPISQtde() != null) {
-            return pis.getPISQtde().getVPIS();
-        } else {
-            return null;
         }
     }
 

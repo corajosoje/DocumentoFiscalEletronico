@@ -8,6 +8,7 @@ package br.jefferson.documentoFiscal.dados.transporte;
 import br.jefferson.conhecimento3a.CteProc;
 import br.jefferson.documentoFiscal.GeradorDocumentoFiscal;
 import br.jefferson.documentoFiscal.util.Util;
+import java.util.List;
 
 /**
  *
@@ -74,22 +75,39 @@ public class DadosTransporte {
                 if (CTe.getCTe().getInfCte().getInfCTeNorm().getInfDoc().getInfOutros() != null) {
                     soma = soma + CTe.getCTe().getInfCte().getInfCTeNorm().getInfDoc().getInfOutros().size();
                 }
-                return String.valueOf(soma);
+                if (soma == 1) {
+                    List<String> nfTransportada = getNFTransportada();
+                    return nfTransportada.get(0);
+                } else {
+                    return String.valueOf(soma);
+                }
             case "1":
                 if (CTe.getCTe().getInfCte().getInfCteComp().getChCTe() != null) {
-                    return "1";
+                    try {
+                        return Util.notNull(CTe.getCTe().getInfCte().getInfCteComp().getChCTe());
+                    } catch (NullPointerException ex) {
+                        return "0";
+                    }
                 } else {
                     return "0";
                 }
             case "2":
                 if (CTe.getCTe().getInfCte().getInfCteAnu().getChCte() != null) {
-                    return "1";
+                    try {
+                        return Util.notNull(CTe.getCTe().getInfCte().getInfCteAnu().getChCte());
+                    } catch (NullPointerException ex) {
+                        return "0";
+                    }
                 } else {
                     return "0";
                 }
             case "3":
                 if (CTe.getCTe().getInfCte().getInfCTeNorm().getInfCteSub().getChCte() != null) {
-                    return "1";
+                    try {
+                        return Util.notNull(CTe.getCTe().getInfCte().getInfCTeNorm().getInfCteSub().getChCte());
+                    } catch (NullPointerException ex) {
+                        return "0";
+                    }
                 } else {
                     return "0";
                 }
