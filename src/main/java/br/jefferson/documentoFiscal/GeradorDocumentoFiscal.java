@@ -75,7 +75,7 @@ public class GeradorDocumentoFiscal {
                         return jaxbUnmarshaller.unmarshal(streamReader, TNfeProc.class).getValue();
                     } catch (JAXBException ex) {
                         LOG.error(ex.getMessage(), ex);
-                        throw new GeradorDocumentoFiscalException("XML NFE incompativel com XSD Mapeado no Projeto DocumentoFiscalEletronico");
+                        throw new GeradorDocumentoFiscalException("Arquivo " + file.getName() + " NFE incompativel com XSD Mapeado no Projeto DocumentoFiscalEletronico");
                     }
                     /*
                     OLD
@@ -95,10 +95,10 @@ public class GeradorDocumentoFiscal {
                         return jaxbUnmarshaller.unmarshal(streamReader, CteProc.class).getValue();
                     } catch (JAXBException ex) {
                         LOG.error(ex.getMessage(), ex);
-                        throw new GeradorDocumentoFiscalException("XML CTE incompativel com XSD Mapeado no Projeto DocumentoFiscalEletronico");
+                        throw new GeradorDocumentoFiscalException("Arquivo " + file.getName() + " CTE incompativel com XSD Mapeado no Projeto DocumentoFiscalEletronico");
                     }
                 } else {
-                    throw new GeradorDocumentoFiscalException("Modelo XML não compativel");
+                    throw new GeradorDocumentoFiscalException("Arquivo " + file.getName() + " Modelo XML não compativel");
                 }
             }
             return null;
