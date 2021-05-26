@@ -3,7 +3,7 @@
     <Properties>
         <Property name="logPath">log</Property>
         <Property name="rollingFileName">DocumentoFiscalEletronico</Property>
-        <Property name="LevelPadrao">ERROR</Property>
+        <Property name="LevelPadrao">WARN</Property>
         <Property name="AppenderPadrao">rollingFile</Property>
     </Properties>
   
@@ -26,6 +26,9 @@
     
     <Loggers>
         <Logger name="br.jefferson.documentoFiscal.dados.transporte.Recebedor" level="${LevelPadrao}" additivity="false">
+            <AppenderRef ref="${AppenderPadrao}"/>
+        </Logger>
+        <Logger name="br.jefferson.documentoFiscal.GeradorDocumentoFiscal" level="${LevelPadrao}" additivity="false">
             <AppenderRef ref="${AppenderPadrao}"/>
         </Logger>
         <Logger name="LoggerTest" level="DEBUG" additivity="false">

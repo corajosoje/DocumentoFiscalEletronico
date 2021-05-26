@@ -16,14 +16,14 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  *
@@ -34,6 +34,7 @@ public class GeradorDocumentoFiscal {
     public static Object xml;
     public static int modelo;
     public static final SimpleDateFormat FORMAT = new SimpleDateFormat("yyyy-MM-dd");
+    private static final Logger LOG = LogManager.getLogger(GeradorDocumentoFiscal.class.getName());
 
     /**
      * Com base em um arquivo xml retorna o documento fiscal se corresponder
@@ -41,10 +42,8 @@ public class GeradorDocumentoFiscal {
      * @param arquivo arquivo xml de nota fiscal
      * @return DocumentoFiscal referente ao arquivo
      * @throws java.io.IOException se o arquivo não puder ser lido
-     * @throws javax.xml.bind.JAXBException se o arquivo não corresponder aos
+     * @throws GeradorDocumentoFiscalException se o arquivo não corresponder aos
      * layouts oficiais
-     * @throws GeradorDocumentoFiscalException
-     *
      */
     public static DocumentoFiscal novoDocumento(File arquivo) throws IOException, JAXBException, GeradorDocumentoFiscalException {
         GeradorDocumentoFiscal.xml = null;
@@ -73,6 +72,16 @@ public class GeradorDocumentoFiscal {
                 streamReader.next();
 
                 if (streamReader.getLocalName().equals("nfeProc")) {
+                    try {
+                        jaxbUnmarshaller = JAXBContext.newInstance(TNfeProc.class).createUnmarshaller();
+                        GeradorDocumentoFiscal.modelo = 55;
+                        return jaxbUnmarshaller.unmarshal(streamReader, TNfeProc.class).getValue();
+                    } catch (JAXBException ex) {
+                        LOG.error(ex.getMessage(), ex);
+                        throw new GeradorDocumentoFiscalException("Arquivo " + file.getName() + " NFE incompativel com XSD Mapeado no Projeto DocumentoFiscalEletronico");
+                    }
+                    /*
+                    OLD
                     if (!streamReader.getAttributeValue("", "versao").substring(0, 1).equals("4")) {
                         throw new GeradorDocumentoFiscalException("Versão do xml incompativel");
                     } else {
@@ -81,29 +90,30 @@ public class GeradorDocumentoFiscal {
                         return jaxbUnmarshaller.unmarshal(streamReader, TNfeProc.class).getValue();
 
                     }
+                     */
                 } else if (streamReader.getLocalName().equals("cteProc")) {
-                    jaxbUnmarshaller = JAXBContext.newInstance(CteProc.class).createUnmarshaller();
-                    GeradorDocumentoFiscal.modelo = 57;
-                    return jaxbUnmarshaller.unmarshal(streamReader, CteProc.class).getValue();
-
-                    //  jaxbUnmarshaller = JAXBContext.newInstance(CteProc.class).createUnmarshaller();
-                    //  return (CteProc) jaxbUnmarshaller.unmarshal(file);
-                    //  return null;
+                    try {
+                        jaxbUnmarshaller = JAXBContext.newInstance(CteProc.class).createUnmarshaller();
+                        GeradorDocumentoFiscal.modelo = 57;
+                        return jaxbUnmarshaller.unmarshal(streamReader, CteProc.class).getValue();
+                    } catch (JAXBException ex) {
+                        LOG.error(ex.getMessage(), ex);
+                        throw new GeradorDocumentoFiscalException("Arquivo " + file.getName() + " CTE incompativel com XSD Mapeado no Projeto DocumentoFiscalEletronico");
+                    }
                 } else {
-                    break;
+                    throw new GeradorDocumentoFiscalException("Arquivo " + file.getName() + " Modelo XML não compativel");
                 }
             }
             return null;
         } catch (XMLStreamException ex) {
-            // br.jefferson.log.fast.FastLog.setLog(ex);
-            Logger.getLogger(GeradorDocumentoFiscal.class.getName()).log(Level.SEVERE, null, ex);
+            LOG.error(ex.getMessage(), ex);
             return null;
         } finally {
 
             try {
                 streamReader.close();
             } catch (XMLStreamException | NullPointerException ex) {
-                Logger.getLogger(GeradorDocumentoFiscal.class.getName()).log(Level.SEVERE, null, ex);
+                LOG.error(ex.getMessage(), ex);
             }
         }
 

@@ -7,22 +7,21 @@ package br.jefferson.documentoFiscal.dados.cadastro;
 
 import br.jefferson.conhecimento3a.CteProc;
 import br.jefferson.documentoFiscal.GeradorDocumentoFiscal;
-import br.jefferson.documentoFiscal.exception.GeradorDocumentoFiscalException;
+import br.jefferson.documentoFiscal.util.Util;
 import br.jefferson.notafiscal4.TNfeProc;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
  * @author jeffersonsvo
  */
 public class EnderecoEmit {
-private static TNfeProc NFe;
+
+    private static TNfeProc NFe;
     private static CteProc CTe;
 
     public EnderecoEmit() {
         if (GeradorDocumentoFiscal.xml instanceof TNfeProc) {
-            NFe = (TNfeProc)GeradorDocumentoFiscal.xml;
+            NFe = (TNfeProc) GeradorDocumentoFiscal.xml;
             CTe = null;
         } else if (GeradorDocumentoFiscal.xml instanceof CteProc) {
             NFe = null;
@@ -31,18 +30,18 @@ private static TNfeProc NFe;
             throw new IllegalStateException("Documento Inválido");
         }
     }
+
     public String getUf() {
         try {
             switch (GeradorDocumentoFiscal.modelo) {
                 case 55:
-                    return NFe.getNFe().getInfNFe().getEmit().getEnderEmit().getUF().value();
+                    return Util.notNull(NFe.getNFe().getInfNFe().getEmit().getEnderEmit().getUF().value());
                 case 57:
-                    return CTe.getCTe().getInfCte().getEmit().getEnderEmit().getUF().value();
+                    return Util.notNull(CTe.getCTe().getInfCte().getEmit().getEnderEmit().getUF().value());
                 default:
                     return "";
             }
-        } catch ( NullPointerException ex) {
-            Logger.getLogger(EnderecoEmit.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NullPointerException ex) {
             return "";
         }
     }
@@ -52,14 +51,13 @@ private static TNfeProc NFe;
 
             switch (GeradorDocumentoFiscal.modelo) {
                 case 55:
-                    return NFe.getNFe().getInfNFe().getEmit().getEnderEmit().getXLgr();
+                    return Util.notNull(NFe.getNFe().getInfNFe().getEmit().getEnderEmit().getXLgr());
                 case 57:
-                    return CTe.getCTe().getInfCte().getEmit().getEnderEmit().getXLgr();
+                    return Util.notNull(CTe.getCTe().getInfCte().getEmit().getEnderEmit().getXLgr());
                 default:
                     return "";
             }
-        } catch ( NullPointerException ex) {
-            Logger.getLogger(EnderecoEmit.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NullPointerException ex) {
             return "";
         }
     }
@@ -68,14 +66,13 @@ private static TNfeProc NFe;
         try {
             switch (GeradorDocumentoFiscal.modelo) {
                 case 55:
-                    return NFe.getNFe().getInfNFe().getEmit().getEnderEmit().getNro();
+                    return Util.notNull(NFe.getNFe().getInfNFe().getEmit().getEnderEmit().getNro());
                 case 57:
-                    return CTe.getCTe().getInfCte().getEmit().getEnderEmit().getNro();
+                    return Util.notNull(CTe.getCTe().getInfCte().getEmit().getEnderEmit().getNro());
                 default:
                     return "";
             }
-        } catch ( NullPointerException ex) {
-            Logger.getLogger(EnderecoEmit.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NullPointerException ex) {
             return "";
         }
     }
@@ -84,14 +81,13 @@ private static TNfeProc NFe;
         try {
             switch (GeradorDocumentoFiscal.modelo) {
                 case 55:
-                    return NFe.getNFe().getInfNFe().getEmit().getIE();
+                    return Util.notNull(NFe.getNFe().getInfNFe().getEmit().getIE());
                 case 57:
-                    return CTe.getCTe().getInfCte().getEmit().getIE();
+                    return Util.notNull(CTe.getCTe().getInfCte().getEmit().getIE());
                 default:
                     return "";
             }
-        } catch ( NullPointerException ex) {
-            Logger.getLogger(EnderecoEmit.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NullPointerException ex) {
             return "";
         }
     }
@@ -100,14 +96,13 @@ private static TNfeProc NFe;
         try {
             switch (GeradorDocumentoFiscal.modelo) {
                 case 55:
-                    return NFe.getNFe().getInfNFe().getEmit().getEnderEmit().getXBairro();
+                    return Util.notNull(NFe.getNFe().getInfNFe().getEmit().getEnderEmit().getXBairro());
                 case 57:
-                    return CTe.getCTe().getInfCte().getEmit().getEnderEmit().getXBairro();
+                    return Util.notNull(CTe.getCTe().getInfCte().getEmit().getEnderEmit().getXBairro());
                 default:
                     return "";
             }
-        } catch ( NullPointerException ex) {
-            Logger.getLogger(EnderecoEmit.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NullPointerException ex) {
             return "";
         }
     }
@@ -116,14 +111,43 @@ private static TNfeProc NFe;
         try {
             switch (GeradorDocumentoFiscal.modelo) {
                 case 55:
-                    return NFe.getNFe().getInfNFe().getEmit().getEnderEmit().getXCpl();
+                    return Util.notNull(NFe.getNFe().getInfNFe().getEmit().getEnderEmit().getXCpl());
                 case 57:
-                    return CTe.getCTe().getInfCte().getEmit().getEnderEmit().getXCpl();
+                    return Util.notNull(CTe.getCTe().getInfCte().getEmit().getEnderEmit().getXCpl());
                 default:
                     return "";
             }
-        } catch ( NullPointerException ex) {
-            Logger.getLogger(EnderecoEmit.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NullPointerException ex) {
+            return "";
+        }
+    }
+
+    public String getIBGE() {
+        try {
+            switch (GeradorDocumentoFiscal.modelo) {
+                case 55:
+                    return Util.notNull(NFe.getNFe().getInfNFe().getEmit().getEnderEmit().getCMun());
+                case 57:
+                    return Util.notNull(CTe.getCTe().getInfCte().getEmit().getEnderEmit().getCMun());
+                default:
+                    return "";
+            }
+        } catch (NullPointerException ex) {
+            return "";
+        }
+    }
+
+    public String getCEP() {
+        try {
+            switch (GeradorDocumentoFiscal.modelo) {
+                case 55:
+                    return Util.notNull(NFe.getNFe().getInfNFe().getEmit().getEnderEmit().getCEP());
+                case 57:
+                    return Util.notNull(CTe.getCTe().getInfCte().getEmit().getEnderEmit().getCEP());
+                default:
+                    return "";
+            }
+        } catch (NullPointerException ex) {
             return "";
         }
     }

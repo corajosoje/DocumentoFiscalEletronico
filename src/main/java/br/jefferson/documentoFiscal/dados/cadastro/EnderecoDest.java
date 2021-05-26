@@ -7,9 +7,8 @@ package br.jefferson.documentoFiscal.dados.cadastro;
 
 import br.jefferson.conhecimento3a.CteProc;
 import br.jefferson.documentoFiscal.GeradorDocumentoFiscal;
+import br.jefferson.documentoFiscal.util.Util;
 import br.jefferson.notafiscal4.TNfeProc;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -22,7 +21,7 @@ public class EnderecoDest {
 
     public EnderecoDest() {
         if (GeradorDocumentoFiscal.xml instanceof TNfeProc) {
-            NFe = (TNfeProc)GeradorDocumentoFiscal.xml;
+            NFe = (TNfeProc) GeradorDocumentoFiscal.xml;
             CTe = null;
         } else if (GeradorDocumentoFiscal.xml instanceof CteProc) {
             NFe = null;
@@ -31,24 +30,25 @@ public class EnderecoDest {
             throw new IllegalStateException("Documento Inválido");
         }
     }
+
     public String getUf() {
         try {
             switch (GeradorDocumentoFiscal.modelo) {
                 case 55:
-                    return NFe.getNFe().getInfNFe().getDest().getEnderDest().getUF().value();
+                    return Util.notNull(NFe.getNFe().getInfNFe().getDest().getEnderDest().getUF().value());
                 case 57:
                     if (CTe.getCTe().getInfCte().getIde().getToma3().getToma() == null) {
-                        return CTe.getCTe().getInfCte().getIde().getToma4().getEnderToma().getUF().value();
+                        return Util.notNull(CTe.getCTe().getInfCte().getIde().getToma4().getEnderToma().getUF().value());
                     } else {
                         switch (CTe.getCTe().getInfCte().getIde().getToma3().getToma()) {
                             case "0"://Remetente
-                                return CTe.getCTe().getInfCte().getRem().getEnderReme().getUF().value();
+                                return Util.notNull(CTe.getCTe().getInfCte().getRem().getEnderReme().getUF().value());
                             case "1"://Expedidor
-                                return CTe.getCTe().getInfCte().getExped().getEnderExped().getUF().value();
+                                return Util.notNull(CTe.getCTe().getInfCte().getExped().getEnderExped().getUF().value());
                             case "2"://Recebedor
-                                return CTe.getCTe().getInfCte().getReceb().getEnderReceb().getUF().value();
+                                return Util.notNull(CTe.getCTe().getInfCte().getReceb().getEnderReceb().getUF().value());
                             case "3"://Destinatário
-                                return CTe.getCTe().getInfCte().getDest().getEnderDest().getUF().value();
+                                return Util.notNull(CTe.getCTe().getInfCte().getDest().getEnderDest().getUF().value());
                             default:
                                 return "";
                         }
@@ -56,8 +56,7 @@ public class EnderecoDest {
                 default:
                     return "";
             }
-        } catch ( NullPointerException ex) {
-            Logger.getLogger(EnderecoDest.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NullPointerException ex) {
             return "";
         }
     }
@@ -66,20 +65,20 @@ public class EnderecoDest {
         try {
             switch (GeradorDocumentoFiscal.modelo) {
                 case 55:
-                    return NFe.getNFe().getInfNFe().getDest().getEnderDest().getXLgr();
+                    return Util.notNull(NFe.getNFe().getInfNFe().getDest().getEnderDest().getXLgr());
                 case 57:
                     if (CTe.getCTe().getInfCte().getIde().getToma3().getToma() == null) {
-                        return CTe.getCTe().getInfCte().getIde().getToma4().getEnderToma().getXLgr();
+                        return Util.notNull(CTe.getCTe().getInfCte().getIde().getToma4().getEnderToma().getXLgr());
                     } else {
                         switch (CTe.getCTe().getInfCte().getIde().getToma3().getToma()) {
                             case "0"://Remetente
-                                return CTe.getCTe().getInfCte().getRem().getEnderReme().getXLgr();
+                                return Util.notNull(CTe.getCTe().getInfCte().getRem().getEnderReme().getXLgr());
                             case "1"://Expedidor
-                                return CTe.getCTe().getInfCte().getExped().getEnderExped().getXLgr();
+                                return Util.notNull(CTe.getCTe().getInfCte().getExped().getEnderExped().getXLgr());
                             case "2"://Recebedor
-                                return CTe.getCTe().getInfCte().getReceb().getEnderReceb().getXLgr();
+                                return Util.notNull(CTe.getCTe().getInfCte().getReceb().getEnderReceb().getXLgr());
                             case "3"://Destinatário
-                                return CTe.getCTe().getInfCte().getDest().getEnderDest().getXLgr();
+                                return Util.notNull(CTe.getCTe().getInfCte().getDest().getEnderDest().getXLgr());
                             default:
                                 return "";
                         }
@@ -87,8 +86,7 @@ public class EnderecoDest {
                 default:
                     return "";
             }
-        } catch ( NullPointerException ex) {
-            Logger.getLogger(EnderecoDest.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NullPointerException ex) {
             return "";
         }
     }
@@ -97,20 +95,20 @@ public class EnderecoDest {
         try {
             switch (GeradorDocumentoFiscal.modelo) {
                 case 55:
-                    return NFe.getNFe().getInfNFe().getDest().getEnderDest().getNro();
+                    return Util.notNull(NFe.getNFe().getInfNFe().getDest().getEnderDest().getNro());
                 case 57:
                     if (CTe.getCTe().getInfCte().getIde().getToma3().getToma() == null) {
-                        return CTe.getCTe().getInfCte().getIde().getToma4().getEnderToma().getNro();
+                        return Util.notNull(CTe.getCTe().getInfCte().getIde().getToma4().getEnderToma().getNro());
                     } else {
                         switch (CTe.getCTe().getInfCte().getIde().getToma3().getToma()) {
                             case "0"://Remetente
-                                return CTe.getCTe().getInfCte().getRem().getEnderReme().getNro();
+                                return Util.notNull(CTe.getCTe().getInfCte().getRem().getEnderReme().getNro());
                             case "1"://Expedidor
-                                return CTe.getCTe().getInfCte().getExped().getEnderExped().getNro();
+                                return Util.notNull(CTe.getCTe().getInfCte().getExped().getEnderExped().getNro());
                             case "2"://Recebedor
-                                return CTe.getCTe().getInfCte().getReceb().getEnderReceb().getNro();
+                                return Util.notNull(CTe.getCTe().getInfCte().getReceb().getEnderReceb().getNro());
                             case "3"://Destinatário
-                                return CTe.getCTe().getInfCte().getDest().getEnderDest().getNro();
+                                return Util.notNull(CTe.getCTe().getInfCte().getDest().getEnderDest().getNro());
                             default:
                                 return "";
                         }
@@ -118,8 +116,7 @@ public class EnderecoDest {
                 default:
                     return "";
             }
-        } catch ( NullPointerException ex) {
-            Logger.getLogger(EnderecoDest.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NullPointerException ex) {
             return "";
         }
     }
@@ -128,20 +125,20 @@ public class EnderecoDest {
         try {
             switch (GeradorDocumentoFiscal.modelo) {
                 case 55:
-                    return NFe.getNFe().getInfNFe().getDest().getIE();
+                    return Util.notNull(NFe.getNFe().getInfNFe().getDest().getIE());
                 case 57:
                     if (CTe.getCTe().getInfCte().getIde().getToma3().getToma() == null) {
-                        return CTe.getCTe().getInfCte().getIde().getToma4().getIE();
+                        return Util.notNull(CTe.getCTe().getInfCte().getIde().getToma4().getIE());
                     } else {
                         switch (CTe.getCTe().getInfCte().getIde().getToma3().getToma()) {
                             case "0"://Remetente
-                                return CTe.getCTe().getInfCte().getRem().getIE();
+                                return Util.notNull(CTe.getCTe().getInfCte().getRem().getIE());
                             case "1"://Expedidor
-                                return CTe.getCTe().getInfCte().getExped().getIE();
+                                return Util.notNull(CTe.getCTe().getInfCte().getExped().getIE());
                             case "2"://Recebedor
-                                return CTe.getCTe().getInfCte().getReceb().getIE();
+                                return Util.notNull(CTe.getCTe().getInfCte().getReceb().getIE());
                             case "3"://Destinatário
-                                return CTe.getCTe().getInfCte().getDest().getIE();
+                                return Util.notNull(CTe.getCTe().getInfCte().getDest().getIE());
                             default:
                                 return "";
                         }
@@ -150,8 +147,7 @@ public class EnderecoDest {
                     return "";
             }
 
-        } catch ( NullPointerException ex) {
-            Logger.getLogger(EnderecoDest.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NullPointerException ex) {
             return "";
         }
     }
@@ -160,20 +156,20 @@ public class EnderecoDest {
         try {
             switch (GeradorDocumentoFiscal.modelo) {
                 case 55:
-                    return NFe.getNFe().getInfNFe().getDest().getEnderDest().getXBairro();
+                    return Util.notNull(NFe.getNFe().getInfNFe().getDest().getEnderDest().getXBairro());
                 case 57:
                     if (CTe.getCTe().getInfCte().getIde().getToma3().getToma() == null) {
-                        return CTe.getCTe().getInfCte().getIde().getToma4().getEnderToma().getXBairro();
+                        return Util.notNull(CTe.getCTe().getInfCte().getIde().getToma4().getEnderToma().getXBairro());
                     } else {
                         switch (CTe.getCTe().getInfCte().getIde().getToma3().getToma()) {
                             case "0"://Remetente
-                                return CTe.getCTe().getInfCte().getRem().getEnderReme().getXBairro();
+                                return Util.notNull(CTe.getCTe().getInfCte().getRem().getEnderReme().getXBairro());
                             case "1"://Expedidor
-                                return CTe.getCTe().getInfCte().getExped().getEnderExped().getXBairro();
+                                return Util.notNull(CTe.getCTe().getInfCte().getExped().getEnderExped().getXBairro());
                             case "2"://Recebedor
-                                return CTe.getCTe().getInfCte().getReceb().getEnderReceb().getXBairro();
+                                return Util.notNull(CTe.getCTe().getInfCte().getReceb().getEnderReceb().getXBairro());
                             case "3"://Destinatário
-                                return CTe.getCTe().getInfCte().getDest().getEnderDest().getXBairro();
+                                return Util.notNull(CTe.getCTe().getInfCte().getDest().getEnderDest().getXBairro());
                             default:
                                 return "";
                         }
@@ -181,8 +177,7 @@ public class EnderecoDest {
                 default:
                     return "";
             }
-        } catch ( NullPointerException ex) {
-            Logger.getLogger(EnderecoDest.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NullPointerException ex) {
             return "";
         }
     }
@@ -191,20 +186,20 @@ public class EnderecoDest {
         try {
             switch (GeradorDocumentoFiscal.modelo) {
                 case 55:
-                    return NFe.getNFe().getInfNFe().getDest().getEnderDest().getXCpl();
+                    return Util.notNull(NFe.getNFe().getInfNFe().getDest().getEnderDest().getXCpl());
                 case 57:
                     if (CTe.getCTe().getInfCte().getIde().getToma3().getToma() == null) {
-                        return CTe.getCTe().getInfCte().getIde().getToma4().getEnderToma().getXCpl();
+                        return Util.notNull(CTe.getCTe().getInfCte().getIde().getToma4().getEnderToma().getXCpl());
                     } else {
                         switch (CTe.getCTe().getInfCte().getIde().getToma3().getToma()) {
                             case "0"://Remetente
-                                return CTe.getCTe().getInfCte().getRem().getEnderReme().getXCpl();
+                                return Util.notNull(CTe.getCTe().getInfCte().getRem().getEnderReme().getXCpl());
                             case "1"://Expedidor
-                                return CTe.getCTe().getInfCte().getExped().getEnderExped().getXCpl();
+                                return Util.notNull(CTe.getCTe().getInfCte().getExped().getEnderExped().getXCpl());
                             case "2"://Recebedor
-                                return CTe.getCTe().getInfCte().getReceb().getEnderReceb().getXCpl();
+                                return Util.notNull(CTe.getCTe().getInfCte().getReceb().getEnderReceb().getXCpl());
                             case "3"://Destinatário
-                                return CTe.getCTe().getInfCte().getDest().getEnderDest().getXCpl();
+                                return Util.notNull(CTe.getCTe().getInfCte().getDest().getEnderDest().getXCpl());
                             default:
                                 return "";
                         }
@@ -212,8 +207,67 @@ public class EnderecoDest {
                 default:
                     return "";
             }
-        } catch ( NullPointerException ex) {
-            Logger.getLogger(EnderecoDest.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NullPointerException ex) {
+            return "";
+        }
+    }
+
+    public String getIBGE() {
+        try {
+            switch (GeradorDocumentoFiscal.modelo) {
+                case 55:
+                    return Util.notNull(NFe.getNFe().getInfNFe().getDest().getEnderDest().getCMun());
+                case 57:
+                    if (CTe.getCTe().getInfCte().getIde().getToma3().getToma() == null) {
+                        return Util.notNull(CTe.getCTe().getInfCte().getIde().getToma4().getEnderToma().getCMun());
+                    } else {
+                        switch (CTe.getCTe().getInfCte().getIde().getToma3().getToma()) {
+                            case "0"://Remetente
+                                return Util.notNull(CTe.getCTe().getInfCte().getRem().getEnderReme().getCMun());
+                            case "1"://Expedidor
+                                return Util.notNull(CTe.getCTe().getInfCte().getExped().getEnderExped().getCMun());
+                            case "2"://Recebedor
+                                return Util.notNull(CTe.getCTe().getInfCte().getReceb().getEnderReceb().getCMun());
+                            case "3"://Destinatário
+                                return Util.notNull(CTe.getCTe().getInfCte().getDest().getEnderDest().getCMun());
+                            default:
+                                return "";
+                        }
+                    }
+                default:
+                    return "";
+            }
+        } catch (NullPointerException ex) {
+            return "";
+        }
+    }
+
+    public String getCEP() {
+        try {
+            switch (GeradorDocumentoFiscal.modelo) {
+                case 55:
+                    return Util.notNull(NFe.getNFe().getInfNFe().getDest().getEnderDest().getCEP());
+                case 57:
+                    if (CTe.getCTe().getInfCte().getIde().getToma3().getToma() == null) {
+                        return Util.notNull(CTe.getCTe().getInfCte().getIde().getToma4().getEnderToma().getCEP());
+                    } else {
+                        switch (CTe.getCTe().getInfCte().getIde().getToma3().getToma()) {
+                            case "0"://Remetente
+                                return Util.notNull(CTe.getCTe().getInfCte().getRem().getEnderReme().getCEP());
+                            case "1"://Expedidor
+                                return Util.notNull(CTe.getCTe().getInfCte().getExped().getEnderExped().getCEP());
+                            case "2"://Recebedor
+                                return Util.notNull(CTe.getCTe().getInfCte().getReceb().getEnderReceb().getCEP());
+                            case "3"://Destinatário
+                                return Util.notNull(CTe.getCTe().getInfCte().getDest().getEnderDest().getCEP());
+                            default:
+                                return "";
+                        }
+                    }
+                default:
+                    return "";
+            }
+        } catch (NullPointerException ex) {
             return "";
         }
     }
