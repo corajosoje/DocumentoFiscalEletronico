@@ -59,6 +59,9 @@ public class GeradorDocumentoFiscal {
         }
     }
 
+    public static void GerarResumoCTe(){
+        
+    }
     private static Object lerDocumento(File file) throws IOException, JAXBException, GeradorDocumentoFiscalException {
 
         XMLStreamReader streamReader = null;
