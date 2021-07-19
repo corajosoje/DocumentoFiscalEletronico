@@ -58,9 +58,21 @@ public class GeradorDocumentoFiscal {
         }
     }
 
-    public static void GerarResumoCTe(){
-        
+    public static ConhecimentoTranporte novoDocumento(CteProc arquivo) throws GeradorDocumentoFiscalException {
+        GeradorDocumentoFiscal.xml = null;
+        GeradorDocumentoFiscal.xml = arquivo;
+        GeradorDocumentoFiscal.modelo = 57;
+        return new ConhecimentoTranporte();
+
     }
+
+    public static NotaFiscal novoDocumento(TNfeProc arquivo) throws GeradorDocumentoFiscalException {
+        GeradorDocumentoFiscal.xml = null;
+        GeradorDocumentoFiscal.xml = arquivo;
+        GeradorDocumentoFiscal.modelo = 55;
+        return new NotaFiscal();
+    }
+
     private static Object lerDocumento(File file) throws IOException, JAXBException, GeradorDocumentoFiscalException {
 
         XMLStreamReader streamReader = null;
