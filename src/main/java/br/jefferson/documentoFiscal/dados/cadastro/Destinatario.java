@@ -11,6 +11,7 @@ import br.jefferson.documentoFiscal.util.Util;
 import br.jefferson.notafiscal4.TNfeProc;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.apache.logging.log4j.LogManager;
 
 /**
  *
@@ -20,6 +21,7 @@ public class Destinatario {
 
     private static TNfeProc NFe;
     private static CteProc CTe;
+    private static final org.apache.logging.log4j.Logger log = LogManager.getLogger(Destinatario.class.getName());
 
     public Destinatario() {
         if (GeradorDocumentoFiscal.xml instanceof TNfeProc) {
@@ -42,7 +44,17 @@ public class Destinatario {
         try {
             switch (GeradorDocumentoFiscal.modelo) {
                 case 55:
-                    return Util.notNull(NFe.getNFe().getInfNFe().getDest().getCNPJ());
+                    log.debug("Iniciando pegar CPF/CNPJ do xml");
+                    log.debug("Cnpj = " + NFe.getNFe().getInfNFe().getDest().getCNPJ());
+                    log.debug("Cpf = " + NFe.getNFe().getInfNFe().getDest().getCPF());
+
+                    if (NFe.getNFe().getInfNFe().getDest().getCNPJ() != null) {
+                        return NFe.getNFe().getInfNFe().getDest().getCNPJ();
+                    } else if (NFe.getNFe().getInfNFe().getDest().getCPF() != null) {
+                        return NFe.getNFe().getInfNFe().getDest().getCPF();
+                    } else {
+                        return "";
+                    }
                 case 57:
                     if (CTe.getCTe().getInfCte().getIde().getToma3().getToma() == null) {
                         return CTe.getCTe().getInfCte().getIde().getToma4().getCNPJ();
